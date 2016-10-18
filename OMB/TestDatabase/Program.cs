@@ -394,9 +394,41 @@ namespace TestDatabase
 #endif
 
 #if PASO_9
-
       //  TODO agregar codigo para ingresar con el ID y password que asignamos a nuestro usuario
+      //
+      SecurityServices seg = new SecurityServices();
 
+      //  Probamos login incorrecto...por usuario inexistente
+      //
+      Usuario usrlogin = seg.LoginUsuario("pirulo", "12345678");
+
+      if (usrlogin == null)
+        Console.WriteLine(seg.ErrorInfo);
+      else
+      {
+        Console.WriteLine("NO PUEDE SER!!!");
+      }
+      //  Probamos login incorrecto...por password incorrecta ==> esto tiene que modificar la tabla (last login BAD))
+      //
+      usrlogin = seg.LoginUsuario("ethedy", "1234567890");
+
+      if (usrlogin == null)
+        Console.WriteLine(seg.ErrorInfo);
+      else
+      {
+        Console.WriteLine("NO PUEDE SER!!!");
+      }
+
+      //  Probamos login incorrecto...por password incorrecta ==> esto tiene que modificar la tabla (last login OK)
+      //
+      usrlogin = seg.LoginUsuario("ethedy", "12345678");
+
+      if (usrlogin != null)
+        Console.WriteLine($"Usuario {usrlogin.Empleado.Persona.Nombres} {usrlogin.Empleado.Persona.Apellidos} conectado!!");
+      else
+      {
+        Console.WriteLine("NO PUEDE SER!!!");
+      }
 #endif
 
       /*

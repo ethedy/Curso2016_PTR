@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OMB_Desktop.Common;
+using OMB_Desktop.ViewModels;
+using OMB_Desktop.Views;
 
 namespace OMB_Desktop
 {
@@ -23,20 +26,21 @@ namespace OMB_Desktop
     public MainWindow()
     {
       InitializeComponent();
+
+      Messenger.Default.Register<LoginMessage>(this, msg =>
+      {
+        if (msg.Show)
+          mainContent.Content = new LoginView();
+        else
+        {
+          mainContent.Content = null;
+        }
+      });
     }
 
-    private void MostrarLogin(object sender, RoutedEventArgs e)
+    private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
-      
-      Views.LoginControl loginControl = new Views.LoginControl();
-
-      mainContent.Content = loginControl;
-
-      loginControl.LoginOK += (o, user) => {
-        mainContent.Content = null;
-        //
-        //  setear el usuario para poder mostrarlo en la UI
-      } ;
+      this.DataContext = new MainWindowViewModel();
     }
   }
 }
