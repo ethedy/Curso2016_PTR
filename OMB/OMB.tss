@@ -2,20 +2,23 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\omb_desktop\mainwindow.xaml</string>
-      <string>d:\desarrollo\omb_2016\omb\omb_desktop\mainwindow.xaml.cs</string>
+      <string>c:\users\enrique\documents\desarrollo\curso2016_ptr\omb\servicios\securityservices.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\servicios\securityservices.cs</string>
+      <string>C:\Users\Enrique\Documents\DESARROLLO\Curso2016_PTR\OMB\OMB_Desktop\Views\LoginView.xaml</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\DESARROLLO\OMB_2016\OMB\TestDatabase\App.config</string>
+      <string>C:\Users\Enrique\Documents\DESARROLLO\Curso2016_PTR\OMB\OMB_Desktop\ViewModels\LoginViewModel.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\testdatabase\program.cs</string>
+      <string>C:\Users\Enrique\Documents\DESARROLLO\Curso2016_PTR\OMB\OMB_Desktop\Common\OMBCommand.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\data\ombcontext.cs</string>
+      <string>C:\Users\Enrique\Documents\DESARROLLO\Curso2016_PTR\OMB\OMB_Desktop\ViewModels\MainWindowViewModel.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Enrique\Documents\DESARROLLO\Curso2016_PTR\OMB\OMB_Desktop\MainWindow.xaml</string>
+      <string>C:\Users\Enrique\Documents\DESARROLLO\Curso2016_PTR\OMB\OMB_Desktop\MainWindow.xaml.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

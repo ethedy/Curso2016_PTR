@@ -7,6 +7,7 @@
              xmlns:viewModel="clr-namespace:OMB_Desktop.ViewModels"
              mc:Ignorable="d" 
              Loaded="LoginViewLoaded"
+               
              d:DesignHeight="300" d:DesignWidth="300">
   <UserControl.DataContext>
     <viewModel:LoginViewModel></viewModel:LoginViewModel>
@@ -24,11 +25,11 @@
     </StackPanel>
     <StackPanel FlowDirection="LeftToRight" Orientation="Horizontal">
       <Label Width="80">Password</Label>
-      <PasswordBox Width="150" Name="txtPassword"></PasswordBox>
+      <TextBox Width="150" Name="txtPassword" Foreground="{Binding ElementName=txtPassword, Path=Background}"></TextBox>
     </StackPanel>
     <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
       <Button Margin="10" Style="{StaticResource BotonLogin}" Command="{Binding LoginCommand}" 
-              CommandParameter="{Binding ActualWidth, ElementName=txtPassword}" >Login</Button>
+              CommandParameter="{Binding Text, ElementName=txtPassword}" >Login</Button>
     </StackPanel>
   </StackPanel>
 </UserControl>

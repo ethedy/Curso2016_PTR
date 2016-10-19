@@ -23,7 +23,7 @@ namespace OMB_Desktop.ViewModels
       set
       {
         _userid = value;
-        OnPropertyChanged("LoginID");
+        OnPropertyChanged(nameof(LoginID));
       }
     }
 
@@ -31,23 +31,29 @@ namespace OMB_Desktop.ViewModels
 
     public LoginViewModel()
     {
-      LoginID = "ethedy";
+      LoginID = "---";
       //
       //  bindeamos comandos
-      LoginCommand = new OMBCommand((param) =>
+      LoginCommand = new OMBCommand(DoLogin, null);
+    }
+
+    public void DoLogin(object param)
+    {
+      SecurityServices seg = new SecurityServices();
+
+      Usuario user = seg.LoginUsuario(LoginID, (string)param);
+      if (user != null)
       {
-        SecurityServices seg = new SecurityServices();
-
-        Usuario user = seg.LoginUsuario(LoginID, (string) param);
         Messenger.Default.Send<Usuario>(user);
-
-      }, null);
+        Messenger.Default.Send<LoginMessage>(new LoginMessage() { Show = false });
+      }
     }
 
     private void OnPropertyChanged(string property)
     {
-      if (PropertyChanged != null)
-        PropertyChanged(this, new PropertyChangedEventArgs(property));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+
+      // if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
     }
   }
 }
