@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -31,7 +32,7 @@ namespace OMB_Desktop.ViewModels
 
     public LoginViewModel()
     {
-      LoginID = "---";
+      //  LoginID = "---";
       //
       //  bindeamos comandos
       LoginCommand = new OMBCommand(DoLogin, null);
@@ -41,11 +42,16 @@ namespace OMB_Desktop.ViewModels
     {
       SecurityServices seg = new SecurityServices();
 
-      Usuario user = seg.LoginUsuario(LoginID, (string)param);
-      if (user != null)
+      SecureString ss = param as SecureString;
+      if (ss != null)
       {
-        Messenger.Default.Send<Usuario>(user);
-        Messenger.Default.Send<LoginMessage>(new LoginMessage() { Show = false });
+        Console.WriteLine(ss);
+        Usuario user = seg.LoginUsuario(LoginID, ss.ToString());
+        if (user != null)
+        {
+          Messenger.Default.Send<Usuario>(user);
+          Messenger.Default.Send<LoginMessage>(new LoginMessage() { Show = false });
+        }
       }
     }
 

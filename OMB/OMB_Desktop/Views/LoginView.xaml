@@ -7,7 +7,6 @@
              xmlns:viewModel="clr-namespace:OMB_Desktop.ViewModels"
              mc:Ignorable="d" 
              Loaded="LoginViewLoaded"
-               
              d:DesignHeight="300" d:DesignWidth="300">
   <UserControl.DataContext>
     <viewModel:LoginViewModel></viewModel:LoginViewModel>
@@ -18,17 +17,18 @@
       <Setter Property="Width" Value="120"></Setter>
     </Style>
   </UserControl.Resources>
+  
   <StackPanel Margin="10">
-    <StackPanel FlowDirection="LeftToRight" Orientation="Horizontal">
+    <DockPanel Margin="10">
       <Label Width="80">Usuario</Label>
-      <TextBox Width="150" Name="txtUsuario" Text="{Binding LoginID}"></TextBox>
-    </StackPanel>
-    <StackPanel FlowDirection="LeftToRight" Orientation="Horizontal">
+      <TextBox Name="txtUsuario" Text="{Binding LoginID}"></TextBox>
+    </DockPanel>
+    <DockPanel Margin="10, 0, 10, 10">
       <Label Width="80">Password</Label>
-      <TextBox Width="150" Name="txtPassword" Foreground="{Binding ElementName=txtPassword, Path=Background}"></TextBox>
-    </StackPanel>
-    <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
-      <Button Margin="10" Style="{StaticResource BotonLogin}" Command="{Binding LoginCommand}" 
+      <TextBox Name="txtPassword" Foreground="{Binding ElementName=txtPassword, Path=Background}" ></TextBox>
+    </DockPanel>
+    <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Margin="10, 0, 10, 10">
+      <Button Padding="10" Style="{StaticResource BotonLogin}" Command="{Binding LoginCommand}" 
               CommandParameter="{Binding Text, ElementName=txtPassword}" >Login</Button>
     </StackPanel>
   </StackPanel>

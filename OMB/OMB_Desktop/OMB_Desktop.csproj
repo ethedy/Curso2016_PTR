@@ -75,8 +75,12 @@
     <Compile Include="Common\LoginMessage.cs" />
     <Compile Include="Common\Messenger.cs" />
     <Compile Include="Common\OMBCommand.cs" />
+    <Compile Include="ViewModels\BookAdminViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\BookAdminView.xaml.cs">
+      <DependentUpon>BookAdminView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BookEditControl.xaml.cs">
       <DependentUpon>BookEditControl.xaml</DependentUpon>
     </Compile>
@@ -98,6 +102,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BookAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BookEditControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
