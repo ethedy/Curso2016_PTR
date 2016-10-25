@@ -1,4 +1,4 @@
-﻿#define PASO_9
+﻿#define PASO_12
 
 using System;
 using System.Collections.Generic;
@@ -397,6 +397,25 @@ namespace TestDatabase
 
       //  TODO agregar codigo para ingresar con el ID y password que asignamos a nuestro usuario
 
+#endif
+
+#if PASO_12
+      //  Agregamos codigo para incorporar editoriales y algunos libros
+      string pathPortadas = @"F:\CURSO_2016_01\src\OMB\imagenes\portadas";
+      ProductServices prods = new ProductServices();
+
+      Editorial editorial;
+
+      editorial = new Editorial() { Nombre = "Addison-Wesley Professional" };
+      ctx.Editoriales.Add(editorial);
+
+      Libro nuevo = prods.NuevoLibro(editorial, 
+        "The C++ Standard Library: A Tutorial and Reference", "9780321623218", 
+        Path.Combine(pathPortadas, "The C++ Standard Library A Tutorial and Reference.jpg"),
+        new DateTime(2012, 4, 9), 1128);
+
+      if (nuevo != null)
+        Console.WriteLine($"Libro agregado correctamente con ID = {nuevo.IDLibro}");
 #endif
 
       /*
