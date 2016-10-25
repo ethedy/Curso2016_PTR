@@ -2,20 +2,13 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\omb_desktop\mainwindow.xaml</string>
-      <string>d:\desarrollo\omb_2016\omb\omb_desktop\mainwindow.xaml.cs</string>
+      <string>D:\DESARROLLO\OMB_2016\OMB\TestDatabase\Program.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\servicios\securityservices.cs</string>
+      <string>D:\DESARROLLO\OMB_2016\OMB\Servicios\ProductServices.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\DESARROLLO\OMB_2016\OMB\TestDatabase\App.config</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\testdatabase\program.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>d:\desarrollo\omb_2016\omb\data\ombcontext.cs</string>
+      <string>OMB_Productos.sqlce - OMB.sdf</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
