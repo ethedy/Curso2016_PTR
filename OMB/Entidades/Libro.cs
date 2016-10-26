@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+  /// <summary>
+  /// TODO agregar autores (M-N)
+  /// Agregar ediciones (primera, segunda...)
+  /// Agregar tipo de edicion disponible (ebook, tapa dura...)
+  /// Agregar idioma
+  /// </summary>
   public class Libro
   {
     public Guid IDLibro { get; set; }
@@ -15,6 +21,10 @@ namespace Entidades
     public string Subtitulo { get; set; }
     public DateTime? FechaPublicacion { get; set; }
     public int? Paginas { get; set; }
+
+    /// <summary>
+    /// Colocariamos datos que tienen que ver con el shipping del libro, por ejemplo peso y dimensiones
+    /// </summary>
     public string DatosEnvio { get; set; }
     public byte[] Portada { get; set; }
 

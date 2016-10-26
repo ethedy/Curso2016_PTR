@@ -1,14 +1,2 @@
 <?xml version="1.0"?>
-<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ArrayOfArrayOfString>
-    <ArrayOfString>
-      <string>D:\DESARROLLO\OMB_2016\OMB\TestDatabase\Program.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\DESARROLLO\OMB_2016\OMB\Servicios\ProductServices.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>OMB_Productos.sqlce - OMB.sdf</string>
-    </ArrayOfString>
-  </ArrayOfArrayOfString>
-</ArrayOfArrayOfArrayOfString>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
