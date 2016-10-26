@@ -27,6 +27,7 @@ namespace Servicios
       bool result = true;
       OMBContext ctx = OMBContext.DB;
 
+      ClearError();
       if (!ValidarUsuario(user))
       {
         ErrorInfo = "No se pudo validar el usuario segun las reglas...";
@@ -83,12 +84,36 @@ namespace Servicios
     /// <returns></returns>
     public Usuario LoginUsuario(string login, string password)
     {
-      Usuario result = null;
+      Usuario usuario ;
+      OMBContext ctx = OMBContext.DB;
 
-      //  TODO Usar el metodo ValidateUserPasswordInternal para validar la combinacion user/password
-      //  TODO Sabiendo que la combinacion es valida, obtenemos los datos del usuario desde EF como hariamos normalmente
-      //  TODO Actualizar los datos de ultimo login correcto o no, guardar cambios!!
-      return result;
+      //  Intentamos obtener los datos del usuario desde EF como hariamos normalmente (puede que no exista!)
+      usuario = ctx.Usuarios.FirstOrDefault(usr => usr.Login == login);
+
+      ClearError();
+      
+      //  Usar el metodo ValidateUserPasswordInternal para validar la combinacion user/password
+      if (usuario != null && ValidateUserPasswordInternal(login, password))
+      {
+        //  Actualizar los datos de ultimo login correcto o no, guardar cambios!!
+        usuario.LastSuccessLogin = DateTime.Now;
+        ctx.SaveChanges();
+      }
+      else
+      {
+        //  si la combinacion es invalida, setear el error correspondiente y luego intentar actualizar last failed login
+        //  este tambien seria un buen momento para incrementar y en cualquier caso bloquear el usuario por reintentos fallidos
+        //
+        ErrorInfo = "Las credenciales del usuario no son validas";
+        if (usuario != null)
+        {
+          usuario.LastFailLogin = DateTime.Now;
+          ctx.SaveChanges();
+
+          usuario = null;
+        }
+      }
+      return usuario;
     }
 
     /// <summary>
@@ -155,6 +180,11 @@ namespace Servicios
         result = false;
       }
       return result;
+    }
+
+    private void ClearError()
+    {
+      ErrorInfo = null;
     }
   }
 }

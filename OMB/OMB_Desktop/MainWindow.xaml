@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OMB_Desktop"
+        xmlns:vm="clr-namespace:OMB_Desktop.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="403" Width="670">
+        Loaded="MainWindow_OnLoaded"
+        Title="Administracion de OMB" 
+        WindowStartupLocation="CenterScreen"
+        Height="403" Width="670">
+  <Window.DataContext>
+    <vm:MainWindowViewModel></vm:MainWindowViewModel>
+  </Window.DataContext>
   <Window.Resources>
     <Style TargetType="{x:Type Button}">
       <Setter Property="Width" Value="150"></Setter>
@@ -24,7 +31,7 @@
       </Grid.ColumnDefinitions>
       <Button Margin="10" VerticalAlignment="Center" Height="30" Padding="5" 
               Grid.Column="0" Grid.Row="0" Style="{StaticResource BotonStandard}"  
-              Name="btnShowLogin" Click="MostrarLogin">Ingresar</Button>
+              Name="btnShowLogin" Command="{Binding LoginShow}">Ingresar</Button>
       <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
               Width="{Binding ElementName=btnShowLogin, Path=Width}"
               Height="{Binding ElementName=btnShowLogin, Path=Height}">Logout</Button>
@@ -33,6 +40,10 @@
         <Button Margin="10"
                 Height="{Binding ElementName=btnShowLogin, Path=Height}">Buscar</Button>
       </StackPanel>
+      <TextBlock Margin="10" Grid.Column="2" 
+                 Background="Aquamarine" 
+                 Text="{Binding Usuario.Empleado.Persona.Apellidos}">
+      </TextBlock>
     </Grid>
     
     <ContentControl Name="mainContent">
