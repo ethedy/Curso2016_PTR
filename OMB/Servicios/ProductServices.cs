@@ -19,12 +19,13 @@ namespace Servicios
     /// O bien el libro ya esta editado pero vamos a realizar una compra para incorporarlo en el stock...
     /// </summary>
     /// <returns></returns>
-    public Libro NuevoLibro(Editorial editor, string titulo, string isbn, string portada, DateTime fechaPublicacion, int paginas)
+    public Libro NuevoLibro(Editorial editor, string titulo, string isbn, string isbn10, string portada, DateTime fechaPublicacion, int paginas)
     {
       Libro nuevoLibro = new Libro()
       {
         Titulo = titulo,
         ISBN = isbn,
+        ISBN10 = isbn10,
         FechaPublicacion = fechaPublicacion,
         Paginas = paginas,
         Editorial = editor

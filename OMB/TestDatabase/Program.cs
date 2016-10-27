@@ -1,4 +1,4 @@
-﻿#define PASO_12
+﻿#define PASO_13
 
 using System;
 using System.Collections.Generic;
@@ -433,14 +433,30 @@ namespace TestDatabase
 
 #if PASO_12
       //  Agregamos codigo para incorporar editoriales y algunos libros
-      string pathPortadas = @"F:\CURSO_2016_01\src\OMB\imagenes\portadas";
-      ProductServices prods = new ProductServices();
+      //  string pathPortadas = @"F:\CURSO_2016_01\src\OMB\imagenes\portadas";
+      //  string pathPortadas = @"F:\CURSO_2016_01\src\OMB\imagenes\portadas";
+      string[] editoriales = {
+                               // "Addison-Wesley Professional",
+                               "The MIT Press",
+                               "O'Reilly Media",
+                               "No Starch Press",
+                               "Apress",
+                               "Microsoft Press",
+                               "Wrox",
+                               "McGraw-Hill Education",
+                               "Wiley"
+                             };
 
       Editorial editorial;
+      //  ProductServices prods = new ProductServices();
 
-      editorial = new Editorial() { Nombre = "Addison-Wesley Professional" };
-      ctx.Editoriales.Add(editorial);
-
+      foreach (string item in editoriales)
+      {
+        editorial = new Editorial() { Nombre = item };
+        ctx.Editoriales.Add(editorial);
+      }
+      ctx.SaveChanges();
+/*
       Libro nuevo = prods.NuevoLibro(editorial, 
         "The C++ Standard Library: A Tutorial and Reference", "9780321623218", 
         Path.Combine(pathPortadas, "The C++ Standard Library A Tutorial and Reference.jpg"),
@@ -448,6 +464,88 @@ namespace TestDatabase
 
       if (nuevo != null)
         Console.WriteLine($"Libro agregado correctamente con ID = {nuevo.IDLibro}");
+ * */
+#endif
+
+#if PASO_13
+      //  Agregamos codigo para incorporar editoriales y algunos libros
+      //  string pathPortadas = @"F:\CURSO_2016_01\src\OMB\imagenes\portadas";
+      string pathPortadas = @"D:\DESARROLLO\OMB_2016\OMB\imagenes\portadas";
+      
+      ProductServices prods = new ProductServices();
+      Libro nuevo;
+
+      nuevo = prods.NuevoLibro(
+        ctx.Editoriales.FirstOrDefault(ed => ed.Nombre.Contains("Wesley")) , 
+        "The C++ Standard Library: A Tutorial and Reference", 
+        "9780321623218",
+        "0321623215",
+        Path.Combine(pathPortadas, "The C++ Standard Library A Tutorial and Reference.jpg"),
+        new DateTime(2012, 4, 9), 
+        1128);
+
+      if (nuevo != null)
+        Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
+
+      nuevo = prods.NuevoLibro(
+        ctx.Editoriales.FirstOrDefault(ed => ed.Nombre.Contains("MIT Press")),
+        "Introduction to Algorithms",
+        "9780262033848",
+        "0262033844",
+        Path.Combine(pathPortadas, "Introduction to Algorithms.jpg"),
+        new DateTime(2009, 7, 31), 
+        1312);
+
+      if (nuevo != null)
+        Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
+
+      nuevo = prods.NuevoLibro(
+        ctx.Editoriales.FirstOrDefault(ed => ed.Nombre.Contains("Reilly")),
+        "Algorithms in a Nutshell: A Practical Guide",
+        "9781491948927",
+        "1491948922",
+        Path.Combine(pathPortadas, "Algorithms in a Nutshell A Practical Guide.jpg"),
+        new DateTime(2016, 4, 2), 
+        390);
+
+      if (nuevo != null)
+        Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
+
+      nuevo = prods.NuevoLibro(
+        ctx.Editoriales.FirstOrDefault(ed => ed.Nombre.Contains("Reilly")),
+        "The Hitchhiker's Guide to Python: Best Practices for Development",
+        "9781491933176",
+        "1491933178",
+        Path.Combine(pathPortadas, "The Hitchhiker's Guide to Python Best Practices for Development.jpg"),
+        new DateTime(2016, 9, 18), 
+        338);
+
+      if (nuevo != null)
+        Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
+
+      nuevo = prods.NuevoLibro(
+        ctx.Editoriales.FirstOrDefault(ed => ed.Nombre.Contains("Reilly")),
+        "Understanding the Linux Kernel",
+        "9780596005658",
+        "0596005652",
+        Path.Combine(pathPortadas, "Understanding the Linux Kernel.jpg"),
+        new DateTime(2005, 11, 1),
+        944);
+
+      if (nuevo != null)
+        Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
+
+      nuevo = prods.NuevoLibro(
+        ctx.Editoriales.FirstOrDefault(ed => ed.Nombre.Contains("Addison-Wesley")),
+        "Unix Network Programming, Volume 1: The Sockets Networking API",
+        "9780131411555",
+        "0131411551",
+        Path.Combine(pathPortadas, "Unix Network Programming, Volume 1 The Sockets Networking API.jpg"),
+        new DateTime(2003, 11, 24),
+        1024);
+
+      if (nuevo != null)
+        Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
 #endif
 
       /*

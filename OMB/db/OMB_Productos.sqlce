@@ -46,7 +46,7 @@ create table Libros
 (
 	ID_Libro					uniqueidentifier			not null,
 	ISBN						nchar(13)					not null,
-	ISBN10						nchar(10),
+	ISBN10						nchar(10)					not null,
 	Titulo						nvarchar(150),				
 	Subtitulo					nvarchar(150),
 	FechaPublicacion			datetime,
