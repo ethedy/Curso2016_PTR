@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDatabase", "TestDatabase\TestDatabase.csproj", "{62E84A02-49EB-440C-92D1-20C9E948DC69}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMB_Desktop", "OMB_Desktop\OMB_Desktop.csproj", "{D9FEF290-9EEB-4534-96F4-81A9D1FA9D13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMB_MVC", "OMB_MVC\OMB_MVC.csproj", "{3B03F360-4966-411A-9C1B-DF3B6928EE93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura", "Infraestructura\Infraestructura.csproj", "{21D28231-1B13-46DC-8CA3-29D566B61CE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{3B03F360-4966-411A-9C1B-DF3B6928EE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B03F360-4966-411A-9C1B-DF3B6928EE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B03F360-4966-411A-9C1B-DF3B6928EE93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D28231-1B13-46DC-8CA3-29D566B61CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D28231-1B13-46DC-8CA3-29D566B61CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D28231-1B13-46DC-8CA3-29D566B61CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D28231-1B13-46DC-8CA3-29D566B61CE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

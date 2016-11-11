@@ -62,9 +62,10 @@ namespace Data
     private OMBContext()
     {
       //Configuration.LazyLoadingEnabled = false;
-      
+
       //  writer = File.CreateText($@"{Environment.CurrentDirectory}\{this.GetType().Name}.LOG");
-      writer = File.CreateText(string.Format(@"{0}\{1}.LOG", Environment.CurrentDirectory, this.GetType().Name));
+      //writer = File.CreateText(string.Format(@"{0}\{1}.LOG", Environment.CurrentDirectory, this.GetType().Name));
+      writer = File.CreateText(string.Format(@"{0}\{1}.LOG", "F:\\", this.GetType().Name));
       Database.Log = writer.WriteLine;
     }
 

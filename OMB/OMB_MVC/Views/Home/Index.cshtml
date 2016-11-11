@@ -1,0 +1,21 @@
+﻿@model Entidades.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+  <div>
+    <h1>
+      <span>@Html.DisplayTextFor(user => user.Empleado.Persona.Nombres)</span> <span>@Html.DisplayTextFor(user => user.Empleado.Persona.Apellidos)</span>
+    </h1>
+  </div>
+</body>
+</html>

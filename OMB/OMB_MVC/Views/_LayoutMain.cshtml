@@ -1,0 +1,80 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link href="~/content/themes/base/jquery-ui.css" rel="stylesheet"/>
+    <link href="~/content/bootstrap.css" rel="stylesheet"/>
+    <link href="~/content/bootstrap-theme.css" rel="stylesheet"/>
+
+    <meta name="viewport" content="width=device-width"/>
+    <title>@ViewBag.Title</title>
+
+    <script src="~/scripts/jquery-3.1.1.js"></script>
+    <script src="~/scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/scripts/bootstrap.js"></script>
+
+    <style>
+      .divTable
+      {
+        display: table;
+        margin: 40px;
+        width: 100%;
+      }
+      .divTable > div
+      {
+        display: table-row;
+      }
+      .divTable > div > div
+      {
+        display: table-cell;
+      }
+
+      .mainTitulo
+      {
+        font-family: "Old English Text MT";
+        font-size: 36pt;
+      }
+
+      .subTitulo
+      {
+        font-family: "Segoe UI";
+        font-size: 24pt;
+      }
+
+      .input-validation-error
+      {
+        border: 2px solid red;
+        background-color: pink;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <header>
+      <div class="container" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col-lg-2 col-sm-4">
+            <img src="../Imagenes/Horror.png" style="margin: 0 auto;" />
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <div>
+              <div class="mainTitulo">Oh my book!</div>
+              <div class="subTitulo">Sitio de Libros</div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-4" style="text-align: center;">
+            <img src="../Imagenes/libros-3.jpg" height="150" style="width: 100%;" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      @RenderBody()
+    </div>
+
+  </body>
+
+</html>
