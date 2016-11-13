@@ -532,7 +532,7 @@ namespace TestDatabase
         new DateTime(2005, 11, 1),
         944);
 
-      if (nuevo != null)
+       if (nuevo != null)
         Console.WriteLine("Libro agregado correctamente con ID = {0}", nuevo.IDLibro);
 
       nuevo = prods.NuevoLibro(

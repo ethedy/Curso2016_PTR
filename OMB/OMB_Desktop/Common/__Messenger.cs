@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace OMB_Desktop.Common
 {
-  public class Messenger
+  public class __Messenger
   {
     private static readonly object CreationLock = new object();
     private static readonly ConcurrentDictionary<MessengerKey, object> Dictionary = new ConcurrentDictionary<MessengerKey, object>();
 
     #region Default property
 
-    private static Messenger _instance;
+    private static __Messenger _instance;
 
     /// <summary>
     /// Gets the single instance of the Messenger.
     /// </summary>
-    public static Messenger Default
+    public static __Messenger Default
     {
       get
       {
@@ -29,7 +29,7 @@ namespace OMB_Desktop.Common
           {
             if (_instance == null)
             {
-              _instance = new Messenger();
+              _instance = new __Messenger();
             }
           }
         }
@@ -43,7 +43,7 @@ namespace OMB_Desktop.Common
     /// <summary>
     /// Initializes a new instance of the Messenger class.
     /// </summary>
-    private Messenger()
+    private __Messenger()
     {
     }
 

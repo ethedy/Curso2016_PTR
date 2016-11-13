@@ -28,7 +28,7 @@ namespace OMB_Desktop
     {
       InitializeComponent();
 
-      Messenger.Default.Register<LoginMessage>(this, msg =>
+      __Messenger.Default.Register<LoginMessage>(this, msg =>
       {
         if (msg.Show)
           mainContent.Content = new LoginView();

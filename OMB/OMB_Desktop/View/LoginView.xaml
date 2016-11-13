@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OMB_Desktop.Views"
-             xmlns:viewModel="clr-namespace:OMB_Desktop.ViewModels"
+             xmlns:viewModel="clr-namespace:OMB_Desktop.ViewModel"
              mc:Ignorable="d" 
              Loaded="LoginViewLoaded"
-             d:DesignHeight="300" d:DesignWidth="300">
-  <UserControl.DataContext>
-    <viewModel:LoginViewModel></viewModel:LoginViewModel>
-  </UserControl.DataContext>
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Login, Source={StaticResource Locator}}"
+             >
   <UserControl.Resources>
     <Style x:Key="BotonLogin" TargetType="{x:Type Button}">
       <Setter Property="FontWeight" Value="Bold"></Setter>

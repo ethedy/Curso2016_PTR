@@ -3,16 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OMB_Desktop"
-        xmlns:vm="clr-namespace:OMB_Desktop.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:OMB_Desktop.Views"
+        xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         Loaded="MainWindow_OnLoaded"
         Title="Administracion de OMB" 
         WindowStartupLocation="CenterScreen"
-        Height="403" Width="670">
-  <Window.DataContext>
-    <vm:MainWindowViewModel></vm:MainWindowViewModel>
-  </Window.DataContext>
+        Height="403" Width="670"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        >
+  <i:Interaction.Triggers>
+    <prism:InteractionRequestTrigger SourceObject="{Binding LoginRequest}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowContent>
+          <local:LoginView></local:LoginView>
+        </prism:PopupWindowAction.WindowContent>
+      </prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
+  </i:Interaction.Triggers>
+  
   <Window.Resources>
     <Style TargetType="{x:Type Button}">
       <Setter Property="Width" Value="150"></Setter>
@@ -31,28 +41,22 @@
       </Grid.ColumnDefinitions>
       <Button Margin="10" VerticalAlignment="Center" Height="30" Padding="5" 
               Grid.Column="0" Grid.Row="0" Style="{StaticResource BotonStandard}"  
-              Name="btnShowLogin" Command="{Binding LoginShow}">Ingresar</Button>
+              Name="btnShowLogin" Command="{Binding LoginCommand}">Ingresar</Button>
       <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
               Width="{Binding ElementName=btnShowLogin, Path=Width}"
               Height="{Binding ElementName=btnShowLogin, Path=Height}">Logout</Button>
-      <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" >
+      <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" >
         <TextBox Margin="10" Width="250"></TextBox>
         <Button Margin="10"
                 Height="{Binding ElementName=btnShowLogin, Path=Height}">Buscar</Button>
       </StackPanel>
-      <TextBlock Margin="10" Grid.Column="2" 
+      <TextBlock Grid.Row="0" Margin="10" Grid.Column="2" 
                  Background="Aquamarine" 
                  Text="{Binding Usuario.Empleado.Persona.Apellidos}">
       </TextBlock>
     </Grid>
-    
+    <TextBlock DockPanel.Dock="Bottom" FontSize="26" Text="{Binding Status}"></TextBlock>
     <ContentControl Name="mainContent">
-      <dxg:TreeListControl Name="treeCategorias">
-        <dxg:TreeListControl.View>
-          <dxg:TreeListView/>
-        </dxg:TreeListControl.View>
-
-      </dxg:TreeListControl>
     </ContentControl>
   </DockPanel>
 </Window>
