@@ -6,11 +6,12 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:OMB_Desktop.Views"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Loaded="MainWindow_OnLoaded"
         Title="Administracion de OMB" 
         WindowStartupLocation="CenterScreen"
-        Height="403" Width="670"
+        Height="700" Width="1100"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         >
   <i:Interaction.Triggers>
@@ -22,13 +23,22 @@
       </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
   </i:Interaction.Triggers>
-  
+
   <Window.Resources>
+    <system:String x:Key="StatusNoConectado">Usuario no Conectado</system:String>
+
     <Style TargetType="{x:Type Button}">
       <Setter Property="Width" Value="150"></Setter>
     </Style>
+    <Style x:Key="StatusBar">
+      <Setter Property="Panel.Background" Value="LightSteelBlue"></Setter>
+      <Setter Property="Control.FontFamily" Value="Verdana"></Setter>
+      <Setter Property="Control.FontSize" Value="14"></Setter>
+      <Setter Property="TextBlock.Margin" Value="5"></Setter>
+    </Style>
   </Window.Resources>
-  <DockPanel LastChildFill="True">
+
+  <DockPanel LastChildFill="False">
     <Grid DockPanel.Dock="Top" Background="Azure">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"></RowDefinition>
@@ -36,27 +46,34 @@
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
         <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
       </Grid.ColumnDefinitions>
-      <Button Margin="10" VerticalAlignment="Center" Height="30" Padding="5" 
-              Grid.Column="0" Grid.Row="0" Style="{StaticResource BotonStandard}"  
-              Name="btnShowLogin" Command="{Binding LoginCommand}">Ingresar</Button>
+      <Button VerticalAlignment="Center" Height="30" Padding="5" 
+              Grid.Column="0" Grid.Row="0" Name="btnShowLogin"
+              Style="{StaticResource BotonStandard}"  
+              Command="{Binding Login}">Login</Button>
       <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
               Width="{Binding ElementName=btnShowLogin, Path=Width}"
-              Height="{Binding ElementName=btnShowLogin, Path=Height}">Logout</Button>
-      <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" >
-        <TextBox Margin="10" Width="250"></TextBox>
-        <Button Margin="10"
-                Height="{Binding ElementName=btnShowLogin, Path=Height}">Buscar</Button>
-      </StackPanel>
-      <TextBlock Grid.Row="0" Margin="10" Grid.Column="2" 
-                 Background="Aquamarine" 
-                 Text="{Binding Usuario.Empleado.Persona.Apellidos}">
-      </TextBlock>
+              Height="{Binding ElementName=btnShowLogin, Path=Height}"
+              Command="{Binding Logout}">Logout</Button>
+
+      <TextBox Grid.Column="1" Grid.Row="1" Margin="10" Width="350" HorizontalAlignment="Right"></TextBox>
+      <Button Grid.Column="2" Grid.Row="1" Margin="10" Style="{StaticResource BotonStandard}">Buscar</Button>
     </Grid>
-    <TextBlock DockPanel.Dock="Bottom" FontSize="26" Text="{Binding Status}"></TextBlock>
     <ContentControl Name="mainContent">
     </ContentControl>
+    <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Style="{StaticResource StatusBar}">
+      <TextBlock DockPanel.Dock="Left" Text="{Binding Status, TargetNullValue='Mensaje de Status'}"></TextBlock>
+      <TextBlock DockPanel.Dock="Right">
+        <TextBlock.Text>
+          <MultiBinding TargetNullValue="{StaticResource StatusNoConectado}" FallbackValue="{StaticResource StatusNoConectado}" 
+                        StringFormat="{}{0} {1}">
+            <Binding Path="Usuario.Empleado.Persona.Nombres"></Binding>
+            <Binding Path="Usuario.Empleado.Persona.Apellidos"></Binding>
+          </MultiBinding>
+        </TextBlock.Text>
+      </TextBlock>
+    </DockPanel>
   </DockPanel>
 </Window>

@@ -98,6 +98,8 @@ create table Personas
 
 select * from Personas
 --  delete from Personas where ID_Persona = '020e5400-a596-4761-8697-d2bedb8bf0e1'
+delete from Personas where ID_Persona != '0c1df635-e79a-414b-bd21-b3ff3efd4965'
+
 
 
 create table Contactos
@@ -163,13 +165,32 @@ delete from Usuarios where Login = 'ethedy1'
 
 create table Perfiles
 (
-	IDPerfil		int			identity 	not null,
-	Nombre			nvarchar()
-	Descripcion		nvarchar()
+	ID_Perfil		int				identity 	not null,
+	Nombre			nvarchar(30)				not null,
+	Descripcion		nvarchar(200),
+	--
+	--	constraints
+	constraint PK_Perfiles primary key (ID_Perfil),
+	constraint UK_Perfiles unique (Nombre)
 )
 
+INSERT INTO Perfiles (Nombre, Descripcion) VALUES ('SysAdmin', 'Administracion total del Sistema');
+INSERT INTO Perfiles (Nombre, Descripcion) VALUES ('StockAdmin', 'Maneja el ingreso/egreso de productos al deposito');
+INSERT INTO Perfiles (Nombre, Descripcion) VALUES ('PDV', 'Atencion al cliente, facturacion, caja');
+INSERT INTO Perfiles (Nombre, Descripcion) VALUES ('AsistenciaCliente', 'Acceso a terminales de ayuda al cliente, busqueda de productos y precios');
 
+select * from perfiles
 
+create table Usuarios_Perfiles
+(
+	Login 			nvarchar(20)	not null,
+	ID_Perfil 		int				not null,
+	--
+	--	constraints
+	constraint PK_Usuarios_Perfiles primary key (Login, ID_Perfil),	--	con esto me aseguro que no podre incorporar dos veces el mismo perfil
+	constraint FK_Usuarios_Perfiles_Usuarios foreign key (Login) references Usuarios (Login),
+	constraint FK_Ususarios_Perfiles_Perfiles foreign key (ID_Perfil) references Perfiles (ID_Perfil)
+);
 
 
 

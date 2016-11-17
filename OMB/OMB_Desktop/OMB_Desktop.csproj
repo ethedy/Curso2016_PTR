@@ -82,9 +82,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -107,7 +105,7 @@
     </ApplicationDefinition>
     <Compile Include="Common\LoginMessage.cs" />
     <Compile Include="Common\__Messenger.cs" />
-    <Compile Include="Common\OMBCommand.cs" />
+    <Compile Include="Common\__OMBCommand.cs" />
     <Compile Include="ViewModel\BookAdminViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -183,9 +181,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{2cae3451-04fe-4aa4-bbf8-828cd5395f2b}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{fd4b98a7-f88e-4dd6-9a82-1090ea815b16}</Project>
       <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infraestructura\Infraestructura.csproj">
+      <Project>{21d28231-1b13-46dc-8ca3-29d566b61ce5}</Project>
+      <Name>Infraestructura</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servicios\Servicios.csproj">
       <Project>{4ca584ae-f608-4d9f-b213-a5812666be66}</Project>

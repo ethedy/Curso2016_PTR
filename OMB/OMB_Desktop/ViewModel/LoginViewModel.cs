@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Entidades;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Infraestructura;
 using OMB_Desktop.Common;
 using Prism.Interactivity.InteractionRequest;
 using Servicios;
@@ -44,16 +45,20 @@ namespace OMB_Desktop.ViewModel
 
     public void DoLogin(string pass)
     {
-      SecurityServices seg = new SecurityServices();
+      SecurityServices seg = new SecurityServices(new NullMailService());
 
       if (pass != null)
       {
         Console.WriteLine(pass);
         Usuario user = seg.LoginUsuario(LoginID, pass);
+
         if (user != null)
         {
-          MessengerInstance.Send<Usuario>(user);
-          MessengerInstance.Send<LoginMessage>(new LoginMessage() { Show = false });
+          OMBSesion sesion = new OMBSesion(user);
+
+          MessengerInstance.Send<OMBSesion>(sesion);
+          FinishInteraction?.Invoke();
+          //MessengerInstance.Send<LoginMessage>(new LoginMessage() { Show = false });
         }
       }
     }

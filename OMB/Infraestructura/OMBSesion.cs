@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Entidades;
 
 namespace Infraestructura
@@ -13,40 +14,62 @@ namespace Infraestructura
   /// </summary>
   public class OMBSesion
   {
-    public Usuario UsuarioConectado { get; private set; }
+    public static OMBSesion Current { get; private set; }
+
+    public Usuario Usuario { get; private set; }
 
     public Perfil Perfil { get; private set; }
 
+    /// <summary>
+    /// Usar esta propiedad para un acceso mas sencillo al nombre completo del usuario, sin tener que navegar entre las 
+    /// propiedades de Empleado y Persona
+    /// </summary>
     public string FullName
     {
       get
       {
-        return string.Format($"{UsuarioConectado .Empleado.Persona.Nombres} {UsuarioConectado.Empleado.Persona.Apellidos}");
+        return string.Format($"{Usuario.Empleado.Persona.Nombres} {Usuario.Empleado.Persona.Apellidos}");
       }
     }
 
-    public DateTime? FechaExpiracion
+    /// <summary>
+    /// Como FullName, esta propiedad es una fachada para no tener que acceder al Usuario
+    /// </summary>
+    public DateTime? FechaExpiracionPass
     {
-      get { return UsuarioConectado.PasswordExpiration ; }
+      get { return Usuario.PasswordExpiration ; }
     }
 
-    public OMBSesion(Usuario usr)
+    public DateTime LastLogin
     {
-      UsuarioConectado = usr;
-      //  TODO null object!!
-      Perfil = null;
+      get { return Usuario.LastSuccessLogin.Value; }
     }
 
-    public OMBSesion(Usuario usr, Perfil perfil)
+    static OMBSesion()
     {
-      UsuarioConectado = usr;
-      Perfil = perfil;
+      Current = null;
+    }
+
+    //  Evitamos la creacion de instancias de OMBSesion, fuera del SINGLETON
+    //
+    private OMBSesion() { }
+
+    public static void CreateNewSession(Usuario usr, Perfil perfil = null)
+    {
+      Current = new OMBSesion();
+
+      Current.Usuario = usr;
+      Current.Perfil = null;        //  TODO null object!!
+    }
+
+    public IEnumerable<string> GetMessageFromConnectedUser()
+    {
+      return null;
     }
 
     public void Logout()
     {
-      UsuarioConectado = null;
-      Perfil = null;
+      Current = null;
     }
   }
 }

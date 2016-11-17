@@ -10,11 +10,11 @@
   <Application.Resources>
     <ResourceDictionary>
       <vml:ViewModelLocator x:Key="Locator"></vml:ViewModelLocator>
+      
       <Style x:Key="BotonStandard" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="100">
-        </Setter>
-        <Setter Property="FontFamily" Value="Consolas">
-        </Setter>
+        <Setter Property="Width" Value="100" />
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="Margin" Value="10"></Setter>
       </Style>
     </ResourceDictionary>
   </Application.Resources>

@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace OMB_Desktop.Common
 {
-  public class OMBCommand : ICommand
+  public class __OMBCommand : ICommand
   {
     private Action<object> _execute;
     private Predicate<object> _canExecute;
 
-    public OMBCommand(Action<object> execute, Predicate<object> canExecute)
+    public __OMBCommand(Action<object> execute, Predicate<object> canExecute)
     {
       _execute = execute;
       _canExecute = canExecute;

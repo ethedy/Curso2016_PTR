@@ -6,15 +6,23 @@ using System.Threading.Tasks;
 
 using Entidades;
 using Data;
+using Infraestructura;
 
 namespace Servicios
 {
   public class SecurityServices
   {
+    private IMailService _mailer;
+
     /// <summary>
     /// Propiedad para retornar el ultimo mensaje de error cuando alguno de los metodos falla
     /// </summary>
     public string ErrorInfo { get; set; }
+
+    public SecurityServices(IMailService mailer)
+    {
+      _mailer = mailer;
+    }
 
     /// <summary>
     /// Este metodo permite crear un usuario en la DB, usando los datos ingresados desde la UI mas la password
@@ -82,7 +90,7 @@ namespace Servicios
     /// <param name="login"></param>
     /// <param name="password"></param>
     /// <returns></returns>
-    public Usuario LoginUsuario(string login, string password)
+    public bool Login(string login, string password)
     {
       Usuario usuario ;
       OMBContext ctx = OMBContext.DB;
@@ -98,6 +106,8 @@ namespace Servicios
         //  Actualizar los datos de ultimo login correcto o no, guardar cambios!!
         usuario.LastSuccessLogin = DateTime.Now;
         ctx.SaveChanges();
+
+        OMBSesion.CreateNewSession(usuario);
       }
       else
       {
@@ -114,6 +124,16 @@ namespace Servicios
         }
       }
       return usuario;
+    }
+
+    public IEnumerable<Perfil> GetPerfilesFromUsuario()
+    {
+      return null;
+    }
+
+    public void Logout()
+    {
+      //  TODO Implementar
     }
 
     /// <summary>
