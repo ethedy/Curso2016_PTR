@@ -32,10 +32,10 @@ namespace OMB_Desktop.Views
 
     private void LoginUser(object sender, RoutedEventArgs e)
     {
-      SecurityServices seg = new SecurityServices();
+      SecurityServices seg = new SecurityServices(null);
 
       //  Validar que usuario y password tengan contenido
-      Usuario user = seg.LoginUsuario(txtUsuario.Text, txtPassword.Password);
+      Usuario user = null ;//= seg.LoginUsuario(txtUsuario.Text, txtPassword.Password);
 
       if (user != null)
       {
@@ -43,8 +43,7 @@ namespace OMB_Desktop.Views
         
         //  TODO: usuario o sesion?
         //  Avisamos a quien quiera escuchar que hubo un login correcto...
-        if (LoginOK != null)
-          LoginOK(this, user);
+        //  if (LoginOK != null) LoginOK(this, user);
       }
       else
         MessageBox.Show("Error en Login!!! Pruebe de nuevo!!");

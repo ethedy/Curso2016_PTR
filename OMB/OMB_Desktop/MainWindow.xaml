@@ -17,6 +17,13 @@
   <i:Interaction.Triggers>
     <prism:InteractionRequestTrigger SourceObject="{Binding LoginRequest}">
       <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowStyle>
+          <Style TargetType="Window">
+            <Setter Property="Width" Value="350"></Setter>
+            <Setter Property="Height" Value="200"></Setter>
+            <Setter Property="ResizeMode" Value="NoResize"></Setter>
+          </Style>
+        </prism:PopupWindowAction.WindowStyle>
         <prism:PopupWindowAction.WindowContent>
           <local:LoginView></local:LoginView>
         </prism:PopupWindowAction.WindowContent>
@@ -26,22 +33,50 @@
 
   <Window.Resources>
     <system:String x:Key="StatusNoConectado">Usuario no Conectado</system:String>
+    <system:String x:Key="StatusNoConectadoFall">Usuario no Conectado*</system:String>
 
-    <Style TargetType="{x:Type Button}">
-      <Setter Property="Width" Value="150"></Setter>
-    </Style>
     <Style x:Key="StatusBar">
       <Setter Property="Panel.Background" Value="LightSteelBlue"></Setter>
       <Setter Property="Control.FontFamily" Value="Verdana"></Setter>
       <Setter Property="Control.FontSize" Value="14"></Setter>
-      <Setter Property="TextBlock.Margin" Value="5"></Setter>
+      <Style.Resources>
+        <Style TargetType="TextBlock">
+         <Setter Property="Margin" Value="7, 5"></Setter>
+        </Style>
+      </Style.Resources>
     </Style>
+
+    <Style x:Key="Botonera">
+      <Setter Property="Button.FontFamily" Value="Consolas"></Setter>
+      <Setter Property="Button.FontSize" Value="14"></Setter>
+      <Style.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}" >
+          <Setter Property="Width" Value="100"></Setter>
+          <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+              <Setter Property="Background" Value="Coral"></Setter>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Style.Resources>
+    </Style>
+
+    <Style x:Key="BotoneraBoton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="FontFamily" Value="Consolas"></Setter>
+      <Setter Property="FontSize" Value="14"></Setter>
+      <Setter Property="Width" Value="100"></Setter>
+      <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="True">
+          <Setter Property="Background" Value="Coral"></Setter>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
   </Window.Resources>
 
   <DockPanel LastChildFill="False">
     <Grid DockPanel.Dock="Top" Background="Azure">
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"></RowDefinition>
         <RowDefinition Height="Auto"></RowDefinition>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
@@ -49,25 +84,37 @@
         <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition Width="Auto"></ColumnDefinition>
       </Grid.ColumnDefinitions>
-      <Button VerticalAlignment="Center" Height="30" Padding="5" 
-              Grid.Column="0" Grid.Row="0" Name="btnShowLogin"
-              Style="{StaticResource BotonStandard}"  
-              Command="{Binding Login}">Login</Button>
-      <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
-              Width="{Binding ElementName=btnShowLogin, Path=Width}"
-              Height="{Binding ElementName=btnShowLogin, Path=Height}"
-              Command="{Binding Logout}">Logout</Button>
-
-      <TextBox Grid.Column="1" Grid.Row="1" Margin="10" Width="350" HorizontalAlignment="Right"></TextBox>
-      <Button Grid.Column="2" Grid.Row="1" Margin="10" Style="{StaticResource BotonStandard}">Buscar</Button>
+      <StackPanel Grid.Column="0" Grid.Row="0"  FlowDirection="LeftToRight" Orientation="Horizontal" Style="{StaticResource Botonera}">
+        <Button VerticalAlignment="Center" Command="{Binding Login}">Login</Button>
+        <Button VerticalAlignment="Center" Command="{Binding Logout}">Logout</Button>
+        <Button VerticalAlignment="Center" Command="{Binding NullCommand}">Nuevo</Button>
+        <Button VerticalAlignment="Center" Command="{Binding NullCommand}">Lista</Button>
+      </StackPanel>
     </Grid>
+
+    <Grid DockPanel.Dock="Top" Background="Azure">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+      
+      <TextBox Grid.Column="1" Grid.Row="0" Margin="10" Width="350" HorizontalAlignment="Right"></TextBox>
+      <Button Grid.Column="2" Grid.Row="0">Buscar</Button>
+    </Grid>
+    
     <ContentControl Name="mainContent">
     </ContentControl>
+    
     <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Style="{StaticResource StatusBar}">
       <TextBlock DockPanel.Dock="Left" Text="{Binding Status, TargetNullValue='Mensaje de Status'}"></TextBlock>
       <TextBlock DockPanel.Dock="Right">
         <TextBlock.Text>
-          <MultiBinding TargetNullValue="{StaticResource StatusNoConectado}" FallbackValue="{StaticResource StatusNoConectado}" 
+          <MultiBinding TargetNullValue="{StaticResource StatusNoConectado}" 
+                        FallbackValue="{StaticResource StatusNoConectadoFall}" 
                         StringFormat="{}{0} {1}">
             <Binding Path="Usuario.Empleado.Persona.Nombres"></Binding>
             <Binding Path="Usuario.Empleado.Persona.Apellidos"></Binding>

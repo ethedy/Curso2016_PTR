@@ -16,6 +16,8 @@ namespace OMB_Desktop.ViewModel
 
     public ICommand Logout { get; set; }
 
+    public ICommand NullCommand { get; set; }
+
     private Usuario _usuario;
 
     public Usuario Usuario 
@@ -57,17 +59,18 @@ namespace OMB_Desktop.ViewModel
       Login = new RelayCommand(() => LoginRequest.Raise(new Notification()
         {
           Title = "Ingreso al sistema",
-          Content = "oioi"
         }, LoginTerminado), () => true);
 
       Logout = new RelayCommand(() =>
       {
-        SecurityServices serv = new SecurityServices();
+        SecurityServices serv = new SecurityServices(null);
 
         serv.Logout();
 
         Usuario = null;
       }, () => Usuario != null);
+
+      NullCommand = new RelayCommand(() => { }, () => false );
 
       MessengerInstance.Register<OMBSesion>(this, MostrarUsuario);
 

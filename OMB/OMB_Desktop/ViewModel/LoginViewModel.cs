@@ -50,13 +50,14 @@ namespace OMB_Desktop.ViewModel
       if (pass != null)
       {
         Console.WriteLine(pass);
-        Usuario user = seg.LoginUsuario(LoginID, pass);
+        //  Usuario user = seg.LoginUsuario(LoginID, pass);
+        Usuario user = null;
 
         if (user != null)
         {
-          OMBSesion sesion = new OMBSesion(user);
+          //  OMBSesion sesion = new OMBSesion(user);
 
-          MessengerInstance.Send<OMBSesion>(sesion);
+          //  MessengerInstance.Send<OMBSesion>(sesion);
           FinishInteraction?.Invoke();
           //MessengerInstance.Send<LoginMessage>(new LoginMessage() { Show = false });
         }

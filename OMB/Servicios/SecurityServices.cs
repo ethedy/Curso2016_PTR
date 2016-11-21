@@ -123,7 +123,7 @@ namespace Servicios
           usuario = null;
         }
       }
-      return usuario;
+      return true;
     }
 
     public IEnumerable<Perfil> GetPerfilesFromUsuario()
