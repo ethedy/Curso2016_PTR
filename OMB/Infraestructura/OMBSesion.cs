@@ -28,7 +28,11 @@ namespace Infraestructura
     {
       get
       {
+#if CS5
+        return string.Format("{0} {1}", Usuario.Empleado.Persona.Nombres, Usuario.Empleado.Persona.Apellidos);
+#else
         return string.Format($"{Usuario.Empleado.Persona.Nombres} {Usuario.Empleado.Persona.Apellidos}");
+#endif
       }
     }
 

@@ -58,7 +58,8 @@ namespace OMB_Desktop.ViewModel
           //  OMBSesion sesion = new OMBSesion(user);
 
           //  MessengerInstance.Send<OMBSesion>(sesion);
-          FinishInteraction?.Invoke();
+          if (FinishInteraction != null)
+            FinishInteraction();
           //MessengerInstance.Send<LoginMessage>(new LoginMessage() { Show = false });
         }
       }

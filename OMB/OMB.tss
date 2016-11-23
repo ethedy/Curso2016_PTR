@@ -2,31 +2,7 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\TestDatabase\Program.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>OMB_Desktop</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\View\LoginView.xaml</string>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\View\LoginView.xaml.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\MainWindow.xaml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\App.config</string>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\App.xaml</string>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\App.xaml.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\ViewModel\ViewModelLocator.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\ViewModel\MainWindowViewModel.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Enrique\Documents\DESARROLLO\OMB_MASTER\OMB\OMB_Desktop\ViewModel\LoginViewModel.cs</string>
+      <string>D:\CURSO_2016_01\src\OMB\Infraestructura\OMBSesion.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

@@ -30,6 +30,8 @@ namespace OMB_Desktop.ViewModel
     /// </summary>
     public ViewModelLocator()
     {
+      if (ViewModelBase.IsInDesignModeStatic)
+        ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
       ////if (ViewModelBase.IsInDesignModeStatic)
       ////{

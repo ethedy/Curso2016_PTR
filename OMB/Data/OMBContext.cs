@@ -63,8 +63,11 @@ namespace Data
     {
       //Configuration.LazyLoadingEnabled = false;
 
-      //  writer = File.CreateText($@"{Environment.CurrentDirectory}\{this.GetType().Name}.LOG");
+#if CS5
       writer = File.CreateText(string.Format(@"{0}\{1}.LOG", Environment.CurrentDirectory, this.GetType().Name));
+#else
+      writer = File.CreateText($@"{Environment.CurrentDirectory}\{this.GetType().Name}.LOG");
+#endif
       //  writer = File.CreateText(string.Format(@"{0}\{1}.LOG", "F:\\", this.GetType().Name));
       Database.Log = writer.WriteLine;
     }

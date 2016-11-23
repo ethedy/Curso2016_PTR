@@ -18,6 +18,8 @@ namespace OMB_Desktop.ViewModel
 
     public ICommand NullCommand { get; set; }
 
+    public ICommand Buscar { get; set; }
+
     private Usuario _usuario;
 
     public Usuario Usuario 
@@ -35,6 +37,14 @@ namespace OMB_Desktop.ViewModel
     {
       get { return _status; }
       set { Set(() => Status, ref _status, value); }
+    }
+
+    private string _buscar;
+
+    public string TextoBuscar
+    {
+      get { return _buscar; }
+      set { Set(() => TextoBuscar, ref _buscar, value); }
     }
 
     public void MostrarUsuario(OMBSesion sesion)
@@ -56,9 +66,10 @@ namespace OMB_Desktop.ViewModel
     public MainWindowViewModel()
     {
       LoginRequest = new InteractionRequest<INotification>();
+
       Login = new RelayCommand(() => LoginRequest.Raise(new Notification()
         {
-          Title = "Ingreso al sistema",
+          Title = "Ingreso al sistema"
         }, LoginTerminado), () => true);
 
       Logout = new RelayCommand(() =>
@@ -85,6 +96,15 @@ namespace OMB_Desktop.ViewModel
       //    }
       //  };
       //}
+    }
+
+    /// <summary>
+    /// Permite buscar o ejecutar un comando a partir de la barra de busqueda
+    /// El comando se ejecuta si esta habilitado
+    /// </summary>
+    private void BuscarTexto()
+    {
+
     }
 
     private void LoginTerminado(INotification notification)
