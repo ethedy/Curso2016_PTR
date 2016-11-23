@@ -85,10 +85,10 @@
         <ColumnDefinition Width="Auto"></ColumnDefinition>
       </Grid.ColumnDefinitions>
       <StackPanel Grid.Column="0" Grid.Row="0"  FlowDirection="LeftToRight" Orientation="Horizontal" Style="{StaticResource Botonera}">
-        <Button VerticalAlignment="Center" Command="{Binding Login}">Login</Button>
-        <Button VerticalAlignment="Center" Command="{Binding Logout}">Logout</Button>
-        <Button VerticalAlignment="Center" Command="{Binding NullCommand}">Nuevo</Button>
-        <Button VerticalAlignment="Center" Command="{Binding NullCommand}">Lista</Button>
+        <Button Command="{Binding Login}">Login</Button>
+        <Button Command="{Binding Logout}">Logout</Button>
+        <Button Command="{Binding NullCommand}">Nuevo</Button>
+        <Button Command="{Binding NullCommand}">Lista</Button>
       </StackPanel>
     </Grid>
 
@@ -110,7 +110,8 @@
     </ContentControl>
     
     <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Style="{StaticResource StatusBar}">
-      <TextBlock DockPanel.Dock="Left" Text="{Binding Status, TargetNullValue='Mensaje de Status'}"></TextBlock>
+      <TextBlock DockPanel.Dock="Left" 
+                 Text="{Binding Status, TargetNullValue='Mensaje de Status', FallbackValue='Status*'}"></TextBlock>
       <TextBlock DockPanel.Dock="Right">
         <TextBlock.Text>
           <MultiBinding TargetNullValue="{StaticResource StatusNoConectado}" 

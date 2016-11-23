@@ -12,7 +12,7 @@ using Microsoft.Practices.ServiceLocation;
 namespace OMB_Desktop
 {
   /// <summary>
-  /// Interaction logic for App.xaml
+  /// Logica general para el startup de la aplicacion
   /// </summary>
   public partial class App : Application
   {

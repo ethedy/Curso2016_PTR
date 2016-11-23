@@ -10,6 +10,10 @@ using Servicios;
 
 namespace OMB_Desktop.ViewModel
 {
+  /// <summary>
+  /// [[VIEWMODEL]]
+  /// Logica de la vista principal de la aplicacion
+  /// </summary>
   public class MainWindowViewModel : ViewModelBase
   {
     public ICommand Login { get; set; }
