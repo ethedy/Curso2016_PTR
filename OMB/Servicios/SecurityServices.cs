@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Entidades;
 using Data;
 using Infraestructura;
+using Servicios.Common;
 
 namespace Servicios
 {
