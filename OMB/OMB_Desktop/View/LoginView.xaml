@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:OMB_Desktop.Views"
              xmlns:viewModel="clr-namespace:OMB_Desktop.ViewModel"
              mc:Ignorable="d" 
@@ -17,18 +19,39 @@
     </Style>
   </UserControl.Resources>
   
+  <i:Interaction.Triggers>
+    <prism:InteractionRequestTrigger SourceObject="{Binding FaltanDatos}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
+
+    <prism:InteractionRequestTrigger SourceObject="{Binding CredencialesInvalidas}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
+    
+    <i:EventTrigger EventName="Loaded">
+      <i:InvokeCommandAction Command="{Binding ClearLoginData}"></i:InvokeCommandAction>
+    </i:EventTrigger>
+  </i:Interaction.Triggers>
+
   <StackPanel Margin="10">
     <DockPanel Margin="10">
       <Label Width="80">Usuario</Label>
-      <TextBox Name="txtUsuario" Text="{Binding LoginID}"></TextBox>
+      <TextBox Name="txtUsuario" Text="{Binding LoginID, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"></TextBox>
     </DockPanel>
     <DockPanel Margin="10, 0, 10, 10">
       <Label Width="80">Password</Label>
-      <TextBox Name="txtPassword" Foreground="{Binding ElementName=txtPassword, Path=Background}" ></TextBox>
+      <TextBox Name="txtPassword" VerticalContentAlignment="Center" Foreground="{Binding ElementName=txtPassword, Path=Background}" 
+               Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"></TextBox>
     </DockPanel>
-    <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Margin="10, 0, 10, 10">
-      <Button Padding="10" Style="{StaticResource BotonLogin}" Command="{Binding LoginCommand}" 
-              CommandParameter="{Binding Text, ElementName=txtPassword}" >Login</Button>
+    <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Margin="10">
+      <Button Padding="10" Style="{StaticResource BotonLogin}" 
+              Command="{Binding LoginCommand}" IsDefault="True">Login
+      </Button>
     </StackPanel>
+    <Button Style="{x:Null}" Background="Transparent" BorderThickness="0" 
+            HorizontalContentAlignment="Left" Padding="10, 0" Foreground="Blue" 
+            Command="{Binding RecuperarContraseña}" >
+      Olvide mi contraseña...
+    </Button>
   </StackPanel>
 </UserControl>

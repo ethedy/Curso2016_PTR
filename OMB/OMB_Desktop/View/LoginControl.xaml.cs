@@ -32,7 +32,7 @@ namespace OMB_Desktop.Views
 
     private void LoginUser(object sender, RoutedEventArgs e)
     {
-      SecurityServices seg = new SecurityServices(null);
+      SecurityServices seg = new SecurityServices();
 
       //  Validar que usuario y password tengan contenido
       Usuario user = null ;//= seg.LoginUsuario(txtUsuario.Text, txtPassword.Password);

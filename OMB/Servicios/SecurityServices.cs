@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,7 @@ using Entidades;
 using Data;
 using Infraestructura;
 using Servicios.Common;
+using Newtonsoft.Json;
 
 namespace Servicios
 {
@@ -20,9 +23,9 @@ namespace Servicios
     /// </summary>
     public string ErrorInfo { get; set; }
 
-    public SecurityServices(IMailService mailer)
+    public SecurityServices(/*  IMailService mailer*/  )
     {
-      _mailer = mailer;
+      //  _mailer = mailer;
     }
 
     /// <summary>
@@ -84,6 +87,31 @@ namespace Servicios
       return result;
     }
 
+    public void RecuperarContraseña()
+    {
+      //  generar una nueva password, con una expiracion de 30 minutos
+      HttpClient mailApi = new HttpClient();
+      MailDefinition mailMsj = new MailDefinition();
+
+      mailApi.DefaultRequestHeaders.Add("Accept", "text/plain");
+      //  mailApi.DefaultRequestHeaders.Add("Accept", "application/json");
+      //  mailApi.DefaultRequestHeaders.Add("Accept", "text/xml");
+
+      mailMsj.From = "OMB Security";
+      mailMsj.To.Add("ethedy@gmail.com");
+      mailMsj.Subject = "Usted olvido otra vez su password!!";
+      mailMsj.Body = "Su password temporal para ingresar al sistema es ...";
+
+      HttpContent contenido = new StringContent(JsonConvert.SerializeObject(mailMsj));
+      contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+      Uri senderApi = new Uri(string.Format("http://www.mutex.com.ar/api/api/mail/sendmail/?token={0}", "123456789"));
+
+      HttpResponseMessage response = mailApi.PostAsync(senderApi, contenido).Result;
+
+      mailApi.Dispose();
+    }
+
     /// <summary>
     /// Este es el metodo que se llamara desde la UI para concretar el login del Usuario, a partir del ID y de la password
     /// El metodo retorna una instancia de Usuario, con el cual podriamos luego establecer una sesion
@@ -95,6 +123,7 @@ namespace Servicios
     {
       Usuario usuario ;
       OMBContext ctx = OMBContext.DB;
+      bool result = false;
 
       //  Intentamos obtener los datos del usuario desde EF como hariamos normalmente (puede que no exista!)
       usuario = ctx.Usuarios.FirstOrDefault(usr => usr.Login == login);
@@ -109,6 +138,7 @@ namespace Servicios
         ctx.SaveChanges();
 
         OMBSesion.CreateNewSession(usuario);
+        result = true;
       }
       else
       {
@@ -124,7 +154,7 @@ namespace Servicios
           usuario = null;
         }
       }
-      return true;
+      return result;
     }
 
     public IEnumerable<Perfil> GetPerfilesFromUsuario()
@@ -135,6 +165,7 @@ namespace Servicios
     public void Logout()
     {
       //  TODO Implementar
+      OMBSesion.Current.Logout();
     }
 
     /// <summary>

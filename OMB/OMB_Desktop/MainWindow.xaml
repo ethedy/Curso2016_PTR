@@ -15,18 +15,23 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         >
   <i:Interaction.Triggers>
-    <prism:InteractionRequestTrigger SourceObject="{Binding LoginRequest}">
+    <prism:InteractionRequestTrigger SourceObject="{Binding DisplayLogin}">
       <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
         <prism:PopupWindowAction.WindowStyle>
           <Style TargetType="Window">
             <Setter Property="Width" Value="350"></Setter>
-            <Setter Property="Height" Value="200"></Setter>
+            <Setter Property="Height" Value="250"></Setter>
             <Setter Property="ResizeMode" Value="NoResize"></Setter>
           </Style>
         </prism:PopupWindowAction.WindowStyle>
         <prism:PopupWindowAction.WindowContent>
           <local:LoginView></local:LoginView>
         </prism:PopupWindowAction.WindowContent>
+      </prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
+    
+    <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmarComando}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
       </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
   </i:Interaction.Triggers>
@@ -102,8 +107,10 @@
         <ColumnDefinition Width="Auto"></ColumnDefinition>
       </Grid.ColumnDefinitions>
       
-      <TextBox Grid.Column="1" Grid.Row="0" Margin="10" Width="350" HorizontalAlignment="Right"></TextBox>
-      <Button Grid.Column="2" Grid.Row="0">Buscar</Button>
+      <TextBox Grid.Column="1" Grid.Row="0" Margin="10" Width="350" 
+               HorizontalAlignment="Right" VerticalContentAlignment="Center" 
+               Text="{Binding TextoBuscar, UpdateSourceTrigger=PropertyChanged}"/>
+      <Button Grid.Column="2" Grid.Row="0" Command="{Binding Buscar}" IsDefault="True">Buscar</Button>
     </Grid>
     
     <ContentControl Name="mainContent">

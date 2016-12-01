@@ -66,6 +66,10 @@ namespace Infraestructura
       Current.Perfil = null;        //  TODO null object!!
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<string> GetMessageFromConnectedUser()
     {
       return null;
