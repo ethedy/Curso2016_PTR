@@ -2,7 +2,16 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>D:\CURSO_2016_01\src\OMB\Infraestructura\OMBSesion.cs</string>
+      <string>D:\CURSO_2016_01\src\OMB\OMB_Desktop\ViewModel\BookAdminViewModel.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\CURSO_2016_01\src\OMB\OMB_Desktop\View\BookAdminView.xaml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\CURSO_2016_01\src\OMB\Servicios\ProductServices.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\CURSO_2016_01\src\OMB\Entidades\Editorial.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

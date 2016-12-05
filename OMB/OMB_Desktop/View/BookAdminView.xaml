@@ -13,12 +13,12 @@
       <Setter Property="Width" Value="100"></Setter>
     </Style>
   </UserControl.Resources>
-  
+
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="*"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
-    </Grid.RowDefinitions>  
+    </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition></ColumnDefinition>
       <ColumnDefinition></ColumnDefinition>
@@ -41,8 +41,8 @@
           <ColumnDefinition></ColumnDefinition>
           <ColumnDefinition Width="120"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox Margin="10">Ruta del archivo</TextBox>
-        <Button Grid.Column="1"></Button>
+        <TextBox Margin="10" Text="{Binding FilePathImage}"></TextBox>
+        <Button Grid.Column="1" Command="{Binding GetImage}">Upload</Button>
       </Grid>
     </Grid>
 
@@ -84,10 +84,11 @@
           <ColumnDefinition Width="100"></ColumnDefinition>
           <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label>Publicacion</Label>
-        <DatePicker Grid.Column="1" Language="es-AR" 
+        <Label VerticalContentAlignment="Center">Publicacion</Label>
+        <DatePicker Grid.Column="1" Language="es-AR"
                     SelectedDate="{Binding FechaPublicacion}" 
-                    DisplayDate="{Binding FechaPublicacion}"></DatePicker>
+                    DisplayDate="{Binding FechaPublicacion}" 
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
       </Grid>
 
       <Grid Margin="0, 10, 0, 0">
@@ -96,7 +97,17 @@
           <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label>Editorial</Label>
-        <ComboBox Grid.Column="1"></ComboBox>
+        <ComboBox Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Editoriales}" 
+                  SelectedItem="{Binding EditorialSeleccionada}">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel>
+                <TextBlock Text="{Binding Nombre}" FontSize="16" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="{Binding Domicilio}" Background="LightBlue"></TextBlock>
+              </StackPanel>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
       </Grid>
     </StackPanel>
   </Grid>
