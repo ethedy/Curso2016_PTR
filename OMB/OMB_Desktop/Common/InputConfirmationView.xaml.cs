@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OMB_Desktop.Views
+namespace OMB_Desktop.Common
 {
   /// <summary>
-  /// Interaction logic for BookEditControl.xaml
+  /// Interaction logic for InputConfirmationView.xaml
   /// </summary>
-  public partial class BookEditControl : UserControl
+  public partial class InputConfirmationView : UserControl
   {
-    public BookEditControl()
+    public InputConfirmationView()
     {
       InitializeComponent();
+    }
+
+    private void InputConfirmationView_OnLoaded(object sender, RoutedEventArgs e)
+    {
+      txtInput.Focus();
     }
   }
 }

@@ -38,11 +38,15 @@ namespace OMB_Desktop.ViewModel
 
     public InteractionRequest<INotification> CredencialesInvalidas { get; set; }
 
+    public InteractionRequest<InputConfirmation> RecuperarPassword { get; set; }
+
     public ICommand LoginCommand { get; set; }
 
     public ICommand ClearLoginData { get; set; }
 
-    public ICommand RecuperarContraseña { get; set; }
+    public ICommand RecoverPassCommand { get; set; }
+
+    public ICommand CancelCommand { get; set; }
 
     public INotification Notification { get; set; }
 
@@ -50,12 +54,14 @@ namespace OMB_Desktop.ViewModel
 
     public LoginViewModel()
     {
-      //  LoginID = "---";
       //
-      //  bindeamos comandos
+      //  bindeamos comandos e interacciones
+      //
       LoginCommand = new RelayCommand(DoLogin);
 
-      RecuperarContraseña = new RelayCommand(DoRecuperarContraseña);
+      CancelCommand = new RelayCommand(() => FinishInteraction());
+
+      RecoverPassCommand = new RelayCommand(DoRecuperarContraseña);
 
       ClearLoginData = new RelayCommand(() =>
       {
@@ -65,6 +71,7 @@ namespace OMB_Desktop.ViewModel
 
       FaltanDatos = new InteractionRequest<INotification>();
       CredencialesInvalidas = new InteractionRequest<INotification>();
+      RecuperarPassword = new InteractionRequest<InputConfirmation>();
     }
 
     public void DoLogin()
@@ -106,9 +113,31 @@ namespace OMB_Desktop.ViewModel
 
     public void DoRecuperarContraseña()
     {
-      SecurityServices seg = new SecurityServices();
+      PasswordRecoveryServices recovery = new PasswordRecoveryServices();
 
-      seg.RecuperarContraseña();
+      RecuperarPassword.Raise(new InputConfirmation()
+      {
+        Title = "Confirmar",
+        Descripcion = recovery.MensajeUsuario,
+        Validator = recovery.ValidatePasswordRecoveryInfo,
+      }, PostNotification);
+    }
+
+    private void PostNotification(InputConfirmation conf)
+    {
+      if (conf.Confirmed)
+      {
+        PasswordRecoveryServices seg = new PasswordRecoveryServices();
+
+        //  podemos pedir mail de destino para buscar y mandarla (si hay usuario asociado)
+        //  podemos mandar el mail al usuario q esta en la caja
+        //  deshabilitar link si no hay login escrito///
+        seg.RecuperarContraseña();
+      }
+      else
+      {
+
+      }
     }
   }
 }

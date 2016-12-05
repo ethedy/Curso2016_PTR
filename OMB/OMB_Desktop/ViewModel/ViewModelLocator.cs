@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using OMB_Desktop.Common;
 using OMB_Desktop.ViewModels;
 
 namespace OMB_Desktop.ViewModel
@@ -46,6 +47,8 @@ namespace OMB_Desktop.ViewModel
 
       SimpleIoc.Default.Register<MainWindowViewModel>();
       SimpleIoc.Default.Register<LoginViewModel>();
+      SimpleIoc.Default.Register<InputConfirmationViewModel>();
+      SimpleIoc.Default.Register<BookAdminViewModel>();
     }
 
     public MainWindowViewModel Main
@@ -57,7 +60,17 @@ namespace OMB_Desktop.ViewModel
     {
       get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }
     }
-        
+
+    public InputConfirmationViewModel InputConfirmation
+    {
+      get { return ServiceLocator.Current.GetInstance<InputConfirmationViewModel>(); }
+    }
+
+    public BookAdminViewModel BookAdmin
+    {
+      get { return ServiceLocator.Current.GetInstance<BookAdminViewModel>(); }
+    }
+
     public static void Cleanup()
     {
       // TODO Clear the ViewModels

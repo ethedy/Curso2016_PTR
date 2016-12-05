@@ -9,21 +9,19 @@ using System.Threading.Tasks;
 using Entidades;
 using Data;
 using Infraestructura;
-using Servicios.Common;
+using Infraestructura.Common;
 using Newtonsoft.Json;
 
 namespace Servicios
 {
   public class SecurityServices
   {
-    private IMailService _mailer;
-
     /// <summary>
     /// Propiedad para retornar el ultimo mensaje de error cuando alguno de los metodos falla
     /// </summary>
     public string ErrorInfo { get; set; }
 
-    public SecurityServices(/*  IMailService mailer*/  )
+    public SecurityServices()
     {
       //  _mailer = mailer;
     }
@@ -87,30 +85,6 @@ namespace Servicios
       return result;
     }
 
-    public void RecuperarContraseña()
-    {
-      //  generar una nueva password, con una expiracion de 30 minutos
-      HttpClient mailApi = new HttpClient();
-      MailDefinition mailMsj = new MailDefinition();
-
-      mailApi.DefaultRequestHeaders.Add("Accept", "text/plain");
-      //  mailApi.DefaultRequestHeaders.Add("Accept", "application/json");
-      //  mailApi.DefaultRequestHeaders.Add("Accept", "text/xml");
-
-      mailMsj.From = "OMB Security";
-      mailMsj.To.Add("ethedy@gmail.com");
-      mailMsj.Subject = "Usted olvido otra vez su password!!";
-      mailMsj.Body = "Su password temporal para ingresar al sistema es ...";
-
-      HttpContent contenido = new StringContent(JsonConvert.SerializeObject(mailMsj));
-      contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-      Uri senderApi = new Uri(string.Format("http://www.mutex.com.ar/api/api/mail/sendmail/?token={0}", "123456789"));
-
-      HttpResponseMessage response = mailApi.PostAsync(senderApi, contenido).Result;
-
-      mailApi.Dispose();
-    }
 
     /// <summary>
     /// Este es el metodo que se llamara desde la UI para concretar el login del Usuario, a partir del ID y de la password
@@ -159,14 +133,16 @@ namespace Servicios
 
     public IEnumerable<Perfil> GetPerfilesFromUsuario()
     {
-      return null;
+      throw new NotImplementedException("Falta implementar GetPerfilesFromUsuario()");
     }
 
     public void Logout()
     {
-      //  TODO Implementar
+      //  TODO Implementar: es necesario guardar en la tabla la fecha/hora de logout del usuario??
       OMBSesion.Current.Logout();
     }
+
+    #region PRIVADOS
 
     /// <summary>
     /// Permite chequear ciertas reglas de negocio respecto a la validez del usuario
@@ -238,5 +214,7 @@ namespace Servicios
     {
       ErrorInfo = null;
     }
+
+    #endregion
   }
 }

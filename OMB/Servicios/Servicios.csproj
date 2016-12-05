@@ -55,10 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\IMailService.cs" />
-    <Compile Include="Common\IMailMessage.cs" />
-    <Compile Include="Common\MailDefinition.cs" />
-    <Compile Include="Common\NullMailService.cs" />
+    <Compile Include="PasswordRecoveryServices.cs" />
     <Compile Include="ProductServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityServices.cs" />

@@ -5,8 +5,99 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OMB_Desktop.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+             d:DesignHeight="400" d:DesignWidth="700"
+             DataContext="{Binding BookAdmin, Source={StaticResource Locator}}"
+             >
+  <UserControl.Resources>
+    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="Width" Value="100"></Setter>
+    </Style>
+  </UserControl.Resources>
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+    </Grid.RowDefinitions>  
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+
+    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft" >
+      <Button></Button>
+      <Button></Button>
+      <Button></Button>
+    </StackPanel>
+
+    <Grid Grid.Row="0" Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition></RowDefinition>
+        <RowDefinition Height="Auto"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Image Margin="10"></Image>
+      <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition></ColumnDefinition>
+          <ColumnDefinition Width="120"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Margin="10">Ruta del archivo</TextBox>
+        <Button Grid.Column="1"></Button>
+      </Grid>
     </Grid>
+
+    <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+      <Grid Margin="0, 10, 0, 0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100"></ColumnDefinition>
+          <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label >ISBN-13</Label>
+        <TextBox Grid.Column="1" ></TextBox>
+      </Grid>
+      <Grid Margin="0, 10, 0, 0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100"></ColumnDefinition>
+          <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label>ISBN-10</Label>
+        <TextBox Grid.Column="1" ></TextBox>
+      </Grid>
+      <Grid Margin="0, 10, 0, 0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100"></ColumnDefinition>
+          <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label>Titulo</Label>
+        <TextBox Grid.Column="1" ></TextBox>
+      </Grid>
+      <Grid Margin="0, 10, 0, 0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100"></ColumnDefinition>
+          <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label>SubTitulo</Label>
+        <TextBox Grid.Column="1" ></TextBox>
+      </Grid>
+      <Grid Margin="0, 10, 0, 0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100"></ColumnDefinition>
+          <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label>Publicacion</Label>
+        <DatePicker Grid.Column="1" Language="es-AR" 
+                    SelectedDate="{Binding FechaPublicacion}" 
+                    DisplayDate="{Binding FechaPublicacion}"></DatePicker>
+      </Grid>
+
+      <Grid Margin="0, 10, 0, 0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100"></ColumnDefinition>
+          <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label>Editorial</Label>
+        <ComboBox Grid.Column="1"></ComboBox>
+      </Grid>
+    </StackPanel>
+  </Grid>
 </UserControl>

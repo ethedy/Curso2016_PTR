@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:OMB_Desktop.Views"
+             xmlns:comm="clr-namespace:OMB_Desktop.Common"
              xmlns:viewModel="clr-namespace:OMB_Desktop.ViewModel"
              mc:Ignorable="d" 
              Loaded="LoginViewLoaded"
@@ -15,17 +16,50 @@
   <UserControl.Resources>
     <Style x:Key="BotonLogin" TargetType="{x:Type Button}">
       <Setter Property="FontWeight" Value="Bold"></Setter>
-      <Setter Property="Width" Value="120"></Setter>
+      <Setter Property="Width" Value="100"></Setter>
     </Style>
+    
   </UserControl.Resources>
   
   <i:Interaction.Triggers>
     <prism:InteractionRequestTrigger SourceObject="{Binding FaltanDatos}">
-      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowStyle>
+          <Style TargetType="Window">
+            <Setter Property="ResizeMode" Value="NoResize"></Setter>
+            <Setter Property="Width" Value="300"></Setter>
+            <Setter Property="Height" Value="150"></Setter>
+          </Style>
+        </prism:PopupWindowAction.WindowStyle>
+      </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
 
     <prism:InteractionRequestTrigger SourceObject="{Binding CredencialesInvalidas}">
-      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowStyle>
+          <Style TargetType="Window">
+            <Setter Property="ResizeMode" Value="NoResize"></Setter>
+            <Setter Property="Width" Value="300"></Setter>
+            <Setter Property="Height" Value="150"></Setter>
+          </Style>
+        </prism:PopupWindowAction.WindowStyle>
+      </prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
+    
+    <prism:InteractionRequestTrigger SourceObject="{Binding RecuperarPassword}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowStyle>
+          <Style TargetType="Window">
+            <Setter Property="ResizeMode" Value="NoResize"></Setter>
+            <Setter Property="WindowStyle" Value="ToolWindow"></Setter>
+            <Setter Property="Width" Value="400"></Setter>
+            <Setter Property="SizeToContent" Value="Height"></Setter>
+          </Style>
+        </prism:PopupWindowAction.WindowStyle>
+        <prism:PopupWindowAction.WindowContent>
+          <comm:InputConfirmationView></comm:InputConfirmationView>
+        </prism:PopupWindowAction.WindowContent>
+      </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
     
     <i:EventTrigger EventName="Loaded">
@@ -45,12 +79,15 @@
     </DockPanel>
     <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Margin="10">
       <Button Padding="10" Style="{StaticResource BotonLogin}" 
-              Command="{Binding LoginCommand}" IsDefault="True">Login
+              Command="{Binding LoginCommand}" IsDefault="True">
+        Login
+      </Button>
+      <Button Padding="10" Style="{StaticResource BotonLogin}" Margin="10, 0, 0, 0" HorizontalAlignment="Left"
+              Command="{Binding }" IsCancel="True" FontWeight="Normal">
+        Cancelar
       </Button>
     </StackPanel>
-    <Button Style="{x:Null}" Background="Transparent" BorderThickness="0" 
-            HorizontalContentAlignment="Left" Padding="10, 0" Foreground="Blue" 
-            Command="{Binding RecuperarContraseña}" >
+    <Button Command="{Binding RecoverPassCommand}" Style="{StaticResource LinkButton}" >
       Olvide mi contraseña...
     </Button>
   </StackPanel>

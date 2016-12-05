@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Servicios.Common
+namespace Infraestructura.Common
 {
   public class MailDefinition
   {

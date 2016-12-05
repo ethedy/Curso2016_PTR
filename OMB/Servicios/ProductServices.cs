@@ -54,5 +54,10 @@ namespace Servicios
       }
       return nuevoLibro;
     }
+
+    public IEnumerable<Editorial> GetEditoriales()
+    {
+      return OMBContext.DB.Editoriales;
+    }
   }
 }

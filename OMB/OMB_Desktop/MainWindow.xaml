@@ -34,6 +34,21 @@
       <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
       </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
+
+    <prism:InteractionRequestTrigger SourceObject="{Binding DisplayAdminLibro}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowStyle>
+          <Style TargetType="Window">
+            <Setter Property="Width" Value="700"></Setter>
+            <Setter Property="Height" Value="400"></Setter>
+            <Setter Property="ResizeMode" Value="NoResize"></Setter>
+          </Style>
+        </prism:PopupWindowAction.WindowStyle>
+        <prism:PopupWindowAction.WindowContent>
+          <local:BookAdminView></local:BookAdminView>
+        </prism:PopupWindowAction.WindowContent>
+      </prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
   </i:Interaction.Triggers>
 
   <Window.Resources>
@@ -92,7 +107,7 @@
       <StackPanel Grid.Column="0" Grid.Row="0"  FlowDirection="LeftToRight" Orientation="Horizontal" Style="{StaticResource Botonera}">
         <Button Command="{Binding Login}">Login</Button>
         <Button Command="{Binding Logout}">Logout</Button>
-        <Button Command="{Binding NullCommand}">Nuevo</Button>
+        <Button Command="{Binding NuevoLibro}">Nuevo</Button>
         <Button Command="{Binding NullCommand}">Lista</Button>
       </StackPanel>
     </Grid>

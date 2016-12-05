@@ -20,6 +20,8 @@ namespace OMB_Desktop.ViewModel
 
     public ICommand Logout { get; set; }
 
+    public ICommand NuevoLibro { get; set; }
+
     public ICommand NullCommand { get; set; }
 
     public ICommand Buscar { get; set; }
@@ -56,6 +58,8 @@ namespace OMB_Desktop.ViewModel
 
     public InteractionRequest<INotification> DisplayLogin { get; set; }
 
+    public InteractionRequest<INotification> DisplayAdminLibro { get; set; }
+
     public InteractionRequest<IConfirmation> ConfirmarComando { get; set; }
 
     /*
@@ -64,11 +68,14 @@ namespace OMB_Desktop.ViewModel
       En este caso el tipo T es IConfirmation porque tengo que decir si acepto o no la ejecucion
 
       Para cada interaccion CASI SIEMPRE tambien tenemos que poner un comando
-  */
-  
+    */
     public MainWindowViewModel()
     {
       DisplayLogin = new InteractionRequest<INotification>();
+
+      ConfirmarComando = new InteractionRequest<IConfirmation>();
+
+      DisplayAdminLibro = new InteractionRequest<INotification>();
 
       Login = new RelayCommand(() =>
       {
@@ -84,11 +91,17 @@ namespace OMB_Desktop.ViewModel
         Status = null;
       }, CanLogout);
 
+      NuevoLibro = new RelayCommand(() =>
+      {
+        DisplayAdminLibro.Raise(new Notification()
+        {
+          Title = "Ingreso de un nuevo libro"
+        });
+      });
+
       NullCommand = new RelayCommand(() => { }, () => false );
 
       Buscar = new RelayCommand(() => BuscarTexto());
-
-      ConfirmarComando = new InteractionRequest<IConfirmation>();
 
       //if (IsInDesignMode)
       //{
@@ -139,6 +152,11 @@ namespace OMB_Desktop.ViewModel
         {
           if (_buscar.ToLower() == "logout" && Logout.CanExecute(null))
             Logout.Execute(null);
+          else
+          {
+            //  tenemos que tener un servicio que permita buscar diferentes elementos
+            //
+          }
         }
       }
     }

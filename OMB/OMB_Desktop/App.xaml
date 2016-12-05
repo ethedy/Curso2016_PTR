@@ -18,6 +18,13 @@
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
       </Style>
       
+      <Style TargetType="TextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+      </Style>
+      
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Content/Estilos.xaml"></ResourceDictionary>
+      </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
