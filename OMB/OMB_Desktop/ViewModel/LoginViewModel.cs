@@ -18,6 +18,8 @@ namespace OMB_Desktop.ViewModel
 {
   public class LoginViewModel : ViewModelBase, IInteractionRequestAware
   {
+    #region Propiedades Bindeables
+
     private string _userid;
 
     public string LoginID
@@ -34,11 +36,19 @@ namespace OMB_Desktop.ViewModel
       set { Set(() => Password, ref _pass, value); }
     }
 
+    #endregion
+
+    #region Interacciones
+
     public InteractionRequest<INotification> FaltanDatos { get; set; }
 
     public InteractionRequest<INotification> CredencialesInvalidas { get; set; }
 
     public InteractionRequest<InputConfirmation> RecuperarPassword { get; set; }
+
+    #endregion
+
+    #region Comandos Bindeables
 
     public ICommand LoginCommand { get; set; }
 
@@ -48,9 +58,15 @@ namespace OMB_Desktop.ViewModel
 
     public ICommand CancelCommand { get; set; }
 
+    #endregion
+
+    #region IInteractionRequestAware
+
     public INotification Notification { get; set; }
 
     public Action FinishInteraction { get; set; }
+
+    #endregion
 
     public LoginViewModel()
     {

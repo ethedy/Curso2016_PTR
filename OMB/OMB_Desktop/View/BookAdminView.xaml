@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:OMB_Desktop.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:view="clr-namespace:OMB_Desktop.View"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="700"
              DataContext="{Binding BookAdmin, Source={StaticResource Locator}}"
@@ -14,6 +16,23 @@
     </Style>
   </UserControl.Resources>
 
+  <i:Interaction.Triggers>
+    <prism:InteractionRequestTrigger SourceObject="{Binding NuevaEditorialRequest}">
+      <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+        <prism:PopupWindowAction.WindowStyle>
+          <Style TargetType="Window">
+            <Setter Property="Width" Value="400"></Setter>
+            <Setter Property="Height" Value="400"></Setter>
+            <Setter Property="ResizeMode" Value="NoResize"></Setter>
+          </Style>
+        </prism:PopupWindowAction.WindowStyle>
+        <prism:PopupWindowAction.WindowContent>
+          <view:EditorialAdminView></view:EditorialAdminView>
+        </prism:PopupWindowAction.WindowContent>
+      </prism:PopupWindowAction>
+    </prism:InteractionRequestTrigger>
+  </i:Interaction.Triggers>
+  
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="*"></RowDefinition>
@@ -25,9 +44,8 @@
     </Grid.ColumnDefinitions>
 
     <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft" >
-      <Button></Button>
-      <Button></Button>
-      <Button></Button>
+      <Button IsDefault="True">Guardar</Button>
+      <Button IsCancel="True">Salir</Button>
     </StackPanel>
 
     <Grid Grid.Row="0" Grid.Column="1">
@@ -35,14 +53,14 @@
         <RowDefinition></RowDefinition>
         <RowDefinition Height="Auto"></RowDefinition>
       </Grid.RowDefinitions>
-      <Image Margin="10"></Image>
+      <Image Margin="10" Source="{Binding Portada, Converter={StaticResource ImageConverter}}"></Image>
       <Grid Grid.Row="1">
         <Grid.ColumnDefinitions>
           <ColumnDefinition></ColumnDefinition>
           <ColumnDefinition Width="120"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox Margin="10" Text="{Binding FilePathImage}"></TextBox>
-        <Button Grid.Column="1" Command="{Binding GetImage}">Upload</Button>
+        <TextBox Margin="10" Text="{Binding FilePathImage, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <Button Grid.Column="1" Command="{Binding UploadImage}">Upload</Button>
       </Grid>
     </Grid>
 
@@ -96,18 +114,17 @@
           <ColumnDefinition Width="100"></ColumnDefinition>
           <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition></RowDefinition>
+          <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         <Label>Editorial</Label>
-        <ComboBox Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Editoriales}" 
-                  SelectedItem="{Binding EditorialSeleccionada}">
-          <ComboBox.ItemTemplate>
-            <DataTemplate>
-              <StackPanel>
-                <TextBlock Text="{Binding Nombre}" FontSize="16" FontWeight="Bold"></TextBlock>
-                <TextBlock Text="{Binding Domicilio}" Background="LightBlue"></TextBlock>
-              </StackPanel>
-            </DataTemplate>
-          </ComboBox.ItemTemplate>
+        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Editoriales}" 
+                  SelectedItem="{Binding EditorialSeleccionada}" ItemTemplate="{StaticResource editorialItemTemplate}">
         </ComboBox>
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0, 10, 0, 0" 
+                Command="{Binding NuevaEditorial}">
+          Nueva...</Button>
       </Grid>
     </StackPanel>
   </Grid>

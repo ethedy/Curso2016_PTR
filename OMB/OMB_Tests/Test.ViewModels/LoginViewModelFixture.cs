@@ -7,7 +7,7 @@ using OMB_Desktop.ViewModel;
 namespace OMB_Tests.Test.ViewModels
 {
   [TestClass]
-  public class LoginViewModelTests
+  public class LoginViewModelFixture
   {
     /// <summary>
     /// Tenemos que probar que ante usuario y/o password en blanco se lanza la ventana de faltan datos

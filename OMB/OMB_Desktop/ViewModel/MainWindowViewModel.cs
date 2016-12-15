@@ -16,19 +16,11 @@ namespace OMB_Desktop.ViewModel
   /// </summary>
   public class MainWindowViewModel : ViewModelBase
   {
-    public ICommand Login { get; set; }
-
-    public ICommand Logout { get; set; }
-
-    public ICommand NuevoLibro { get; set; }
-
-    public ICommand NullCommand { get; set; }
-
-    public ICommand Buscar { get; set; }
+    #region Propiedades Bindeables
 
     private Usuario _usuario;
 
-    public Usuario Usuario 
+    public Usuario Usuario
     {
       get { return _usuario; }
       set
@@ -56,11 +48,31 @@ namespace OMB_Desktop.ViewModel
       }
     }
 
-    public InteractionRequest<INotification> DisplayLogin { get; set; }
+    #endregion
 
-    public InteractionRequest<INotification> DisplayAdminLibro { get; set; }
+    #region Comandos Bindeables
 
-    public InteractionRequest<IConfirmation> ConfirmarComando { get; set; }
+    public ICommand Login { get; set; }
+
+    public ICommand Logout { get; set; }
+
+    public ICommand NuevoLibro { get; set; }
+
+    public ICommand Buscar { get; set; }
+
+    public ICommand NullCommand { get; set; }
+
+    #endregion
+
+    #region Interacciones
+
+    public InteractionRequest<INotification> LoginRequest { get; set; }
+
+    public InteractionRequest<INotification> AdminLibroRequest { get; set; }
+
+    public InteractionRequest<IConfirmation> ConfirmarRequest { get; set; }
+
+    #endregion 
 
     /*
       InteractionRequest es la manera que tiene la ui de avisarnos que existe un pedido del
@@ -71,16 +83,16 @@ namespace OMB_Desktop.ViewModel
     */
     public MainWindowViewModel()
     {
-      DisplayLogin = new InteractionRequest<INotification>();
+      LoginRequest = new InteractionRequest<INotification>();
 
-      ConfirmarComando = new InteractionRequest<IConfirmation>();
+      ConfirmarRequest = new InteractionRequest<IConfirmation>();
 
-      DisplayAdminLibro = new InteractionRequest<INotification>();
+      AdminLibroRequest = new InteractionRequest<INotification>();
 
       Login = new RelayCommand(() =>
       {
-        DisplayLogin.Raise(new Notification() { Title = "Ingreso al sistema" }, LoginTerminado);
-      }, CanLogin);
+        LoginRequest.Raise(new Notification() { Title = "Ingreso al sistema" }, LoginTerminado);
+      }, () => Usuario == null);
 
       Logout = new RelayCommand(() =>
       {
@@ -89,15 +101,19 @@ namespace OMB_Desktop.ViewModel
         serv.Logout();
         Usuario = null;
         Status = null;
-      }, CanLogout);
+      }, () => Usuario != null);
 
+      //
+      //  sin notificacion de callback...o sea que si hay un nuevo libro no me afectaria...
+      //  salvo para avisar
+      //
       NuevoLibro = new RelayCommand(() =>
       {
-        DisplayAdminLibro.Raise(new Notification()
+        AdminLibroRequest.Raise(new Notification()
         {
           Title = "Ingreso de un nuevo libro"
         });
-      });
+      }, () => Usuario != null);
 
       NullCommand = new RelayCommand(() => { }, () => false );
 
@@ -138,7 +154,7 @@ namespace OMB_Desktop.ViewModel
         //  en base a los contenidos, decidir que accion se tiene que realizar
         if (_buscar.ToLower() == "login")
         {
-          ConfirmarComando.Raise(new Confirmation()
+          ConfirmarRequest.Raise(new Confirmation()
           {
             Title = "VALIDAR COMANDO",
             Content = "Se esta por intentar ejecutar el comando login desde la barra de busqueda. Es esto correcto?"

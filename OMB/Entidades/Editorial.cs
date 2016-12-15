@@ -13,6 +13,7 @@ namespace Entidades
     public string Domicilio { get; set; }
     public string AmpliacionDomicilio { get; set; }
     public string CodigoPostal { get; set; }
+    public byte[] Logotipo { get; set; }
 
     public virtual Localidad Localidad { get; set; }
 

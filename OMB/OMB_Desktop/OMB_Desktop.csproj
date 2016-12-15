@@ -103,6 +103,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Helpers.cs" />
+    <Compile Include="Common\ImageConverter.cs" />
     <Compile Include="Common\InputConfirmation.cs" />
     <Compile Include="Common\InputConfirmationView.xaml.cs">
       <DependentUpon>InputConfirmationView.xaml</DependentUpon>
@@ -112,12 +114,16 @@
     <Compile Include="Common\__Messenger.cs" />
     <Compile Include="Common\__OMBCommand.cs" />
     <Compile Include="ViewModel\BookAdminViewModel.cs" />
+    <Compile Include="ViewModel\EditorialAdminViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BookAdminView.xaml.cs">
       <DependentUpon>BookAdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditorialAdminView.xaml.cs">
+      <DependentUpon>EditorialAdminView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -143,6 +149,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\BookAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditorialAdminView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +190,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DESARROLLO\MCMA\src\UIControles\UIControles.csproj">
+      <Project>{f649f4e2-be35-4776-810c-9e21add7840e}</Project>
+      <Name>UIControles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{2cae3451-04fe-4aa4-bbf8-828cd5395f2b}</Project>
       <Name>Data</Name>
@@ -198,7 +212,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\imagenes\" />
+    <Resource Include="Content\imagenes\Bart-Simpson-01-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\imagenes\AddisonWesley.png" />
+    <Resource Include="Content\imagenes\Apress-logo.png" />
+    <Resource Include="Content\imagenes\John-Wiley-and-Sons-logo.png" />
+    <Resource Include="Content\imagenes\logo_manning.png" />
+    <Resource Include="Content\imagenes\McGraw-Hill_90s.jpg" />
+    <Resource Include="Content\imagenes\oreilly-illustration-%402x-255x300.png" />
+    <Resource Include="Content\imagenes\packt_logo.png" />
+    <Resource Include="Content\imagenes\pd0Z9.png" />
+    <Resource Include="Content\imagenes\wiley_logosm.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\imagenes\Book 01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -49,6 +49,7 @@ namespace OMB_Desktop.ViewModel
       SimpleIoc.Default.Register<LoginViewModel>();
       SimpleIoc.Default.Register<InputConfirmationViewModel>();
       SimpleIoc.Default.Register<BookAdminViewModel>();
+      SimpleIoc.Default.Register<EditorialAdminViewModel>();
     }
 
     public MainWindowViewModel Main
@@ -71,6 +72,10 @@ namespace OMB_Desktop.ViewModel
       get { return ServiceLocator.Current.GetInstance<BookAdminViewModel>(); }
     }
 
+    public EditorialAdminViewModel EditorialAdmin
+    {
+      get { return ServiceLocator.Current.GetInstance<EditorialAdminViewModel>(); }
+    }
     public static void Cleanup()
     {
       // TODO Clear the ViewModels

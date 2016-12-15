@@ -1,4 +1,4 @@
---	drop table Categorias
+﻿--	drop table Categorias
 
 create table Categorias
 (
@@ -28,6 +28,7 @@ create table Editoriales
 	AmpliacionDomicilio				nvarchar(150),
 	CodigoPostal					nvarchar(20),
 	ID_Localidad					int,
+	Logotipo						image,
 	--
 	--	constraints
 	--

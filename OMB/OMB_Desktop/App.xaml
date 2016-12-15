@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:local="clr-namespace:OMB_Desktop" 
              xmlns:vml="clr-namespace:OMB_Desktop.ViewModel"
+             xmlns:common="clr-namespace:OMB_Desktop.Common"
              StartupUri="MainWindow.xaml" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              d1p1:Ignorable="d" 
@@ -10,6 +11,7 @@
   <Application.Resources>
     <ResourceDictionary>
       <vml:ViewModelLocator x:Key="Locator"></vml:ViewModelLocator>
+      <common:ImageConverter x:Key="ImageConverter"></common:ImageConverter>
       
       <Style TargetType="{x:Type Button}">
         <Setter Property="Margin" Value="10"></Setter>

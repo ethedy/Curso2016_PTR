@@ -26,4 +26,10 @@
     </Setter>
   </Style>
 
+  <DataTemplate x:Key="editorialItemTemplate">
+    <StackPanel>
+      <TextBlock Text="{Binding Nombre}" FontSize="16" FontWeight="Bold"></TextBlock>
+      <TextBlock Text="{Binding Domicilio}" Background="LightBlue"></TextBlock>
+    </StackPanel>
+  </DataTemplate>
 </ResourceDictionary>

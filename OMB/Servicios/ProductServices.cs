@@ -55,6 +55,11 @@ namespace Servicios
       return nuevoLibro;
     }
 
+    public Editorial NuevaEditorial(string nombre, string direccion, string logotipo)
+    {
+      return null;
+    }
+
     public IEnumerable<Editorial> GetEditoriales()
     {
       return OMBContext.DB.Editoriales;

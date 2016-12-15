@@ -15,7 +15,7 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         >
   <i:Interaction.Triggers>
-    <prism:InteractionRequestTrigger SourceObject="{Binding DisplayLogin}">
+    <prism:InteractionRequestTrigger SourceObject="{Binding  LoginRequest}">
       <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
         <prism:PopupWindowAction.WindowStyle>
           <Style TargetType="Window">
@@ -30,12 +30,12 @@
       </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
     
-    <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmarComando}">
+    <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmarRequest}">
       <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
       </prism:PopupWindowAction>
     </prism:InteractionRequestTrigger>
 
-    <prism:InteractionRequestTrigger SourceObject="{Binding DisplayAdminLibro}">
+    <prism:InteractionRequestTrigger SourceObject="{Binding AdminLibroRequest}">
       <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
         <prism:PopupWindowAction.WindowStyle>
           <Style TargetType="Window">
@@ -100,15 +100,17 @@
         <RowDefinition Height="Auto"></RowDefinition>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition Width="Auto"></ColumnDefinition>
       </Grid.ColumnDefinitions>
       <StackPanel Grid.Column="0" Grid.Row="0"  FlowDirection="LeftToRight" Orientation="Horizontal" Style="{StaticResource Botonera}">
         <Button Command="{Binding Login}">Login</Button>
-        <Button Command="{Binding Logout}">Logout</Button>
         <Button Command="{Binding NuevoLibro}">Nuevo</Button>
         <Button Command="{Binding NullCommand}">Lista</Button>
+      </StackPanel>
+      <StackPanel Grid.Column="2" Grid.Row="0"  FlowDirection="RightToLeft" Orientation="Horizontal" Style="{StaticResource Botonera}">
+        <Button Command="{Binding Logout}">Logout</Button>
       </StackPanel>
     </Grid>
 

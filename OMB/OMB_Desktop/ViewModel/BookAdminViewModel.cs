@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Entidades;
+using OMB_Desktop.Common;
+using Prism.Interactivity.InteractionRequest;
 using Servicios;
 
 namespace OMB_Desktop.ViewModels
 {
   public class BookAdminViewModel : ViewModelBase
   {
-    #region Binding Properties
+    #region Propiedades Bindeables
 
     private string _isbn13;
 
@@ -79,13 +82,30 @@ namespace OMB_Desktop.ViewModels
       set { Set(() => EditorialSeleccionada, ref _editorialSeleccionada, value); }
     }
 
+    private byte[] _portada;
+
+    public byte[] Portada
+    {
+      get { return _portada; }
+      set { Set(() => Portada, ref _portada, value); }
+    }
+
     #endregion
 
-    #region Binding Commands
+    #region Comandos Bindeables
 
-    public ICommand GetImage { get; set; }
+    public ICommand UploadImage { get; set; }
+
+    public ICommand NuevaEditorial { get; set; }
 
     #endregion
+
+    #region Interacciones
+
+    public InteractionRequest<IConfirmation> NuevaEditorialRequest { get; set; }
+
+    #endregion
+
 
     public BookAdminViewModel()
     {
@@ -93,6 +113,7 @@ namespace OMB_Desktop.ViewModels
       {
         FechaPublicacion = DateTime.Now;
         FilePathImage = "Ingresar una ruta valida...";
+        Portada = Helpers.PathToByteArray(@"F:\CURSO_2016_01\src\OMB\OMB_Desktop\Content\imagenes\Book 01.png");
       }
       else
       {
@@ -100,15 +121,36 @@ namespace OMB_Desktop.ViewModels
 
         FechaPublicacion = DateTime.Now;
 
-        Editoriales = new List<Editorial>(prod.GetEditoriales());
+        var editoriales = prod.GetEditoriales();
+        Editoriales = new List<Editorial>(editoriales);
 
-        GetImage = new RelayCommand(DoGetImage);
+        UploadImage = new RelayCommand(DoUploadImage, () => !string.IsNullOrWhiteSpace(FilePathImage));
+
+        NuevaEditorialRequest = new InteractionRequest<IConfirmation>();
+
+        NuevaEditorial = new RelayCommand(() => NuevaEditorialRequest.Raise(new Confirmation()
+        {
+          Title = "Nueva Editorial"          
+        }, NuevaEditorialConfirmada));
+
+        //  si tengo que editar un libro, no me queda otra que usar un Messenger
+
+        //  no deberia tener un evento de salida para limpiar los campos??
       }
     }
 
-    private void DoGetImage()
+    //  con la confirmacion podria saber si agregamos una nueva editorial o no...
+    private void NuevaEditorialConfirmada(IConfirmation conf)
     {
-      string file = _imagePath;
+      //
+    }
+
+    private void DoUploadImage()
+    {
+      var temp = Helpers.PathToByteArray(FilePathImage);
+
+      if (temp != null)
+        Portada = temp;
     }
   }
 }

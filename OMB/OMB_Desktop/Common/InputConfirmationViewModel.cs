@@ -14,6 +14,8 @@ namespace OMB_Desktop.Common
   {
     private InputConfirmation _inputConfirmation;
 
+    #region Propiedades Bindeables
+
     private string _descripcion;
 
     public string Descripcion
@@ -30,15 +32,25 @@ namespace OMB_Desktop.Common
       set { Set(() => Input, ref _inputText, value); }
     }
 
-    public ICommand AceptarCommand { get; set; }
+    #endregion
 
-    public ICommand CancelarCommand { get; set; }
+    #region Comandos Bindeables
+
+    public ICommand Aceptar { get; set; }
+
+    public ICommand Cancelar { get; set; }
 
     public ICommand LoadedBehavior { get; set; }
+
+    #endregion
+
+    #region IInteractionRequestAware
 
     public INotification Notification { get; set; }
 
     public Action FinishInteraction { get; set; }
+
+    #endregion
 
     public InputConfirmationViewModel()
     {
@@ -57,13 +69,17 @@ namespace OMB_Desktop.Common
         }
       });
 
-      AceptarCommand = new RelayCommand(() =>
+      Aceptar = new RelayCommand(() =>
       {
-        _inputConfirmation.Confirmed = true;
-        FinishInteraction();
+        if (_inputConfirmation.Validator(Input))
+        {
+          _inputConfirmation.Confirmed = true;
+          FinishInteraction();
+        }
+        //  aca podriamos marcar con un error visual en la UI...obviamente con la interface requerida...
       });
 
-      CancelarCommand = new RelayCommand(() =>
+      Cancelar = new RelayCommand(() =>
       {
         _inputConfirmation.Confirmed = false;
         FinishInteraction();
